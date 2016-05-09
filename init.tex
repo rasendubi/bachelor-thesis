@@ -19,61 +19,7 @@
 
 \linespread{1.3}
 
-\usepackage{enumitem}
-\newlength\myitemwidth{}
-\setlength\myitemwidth{5em}
-\newlist{myacronymlist}{description}{1}
-\setlist[myacronymlist]{
-  labelindent = 0pt,
-  labelsep = 0pt,
-  leftmargin = \myitemwidth,
-  labelwidth = \myitemwidth,
-  itemindent = 0pt,
-  format = \bfseries,
-}
-
-\usepackage{acro}
-\DeclareAcroListStyle{myliststyle}{list}{
-  list = myacronymlist,
-}
-\acsetup{
-  sort,
-  %first-style=short,
-  only-used=false,
-  list-style = myliststyle,
-}
-\DeclareAcronym{MMU}{
-  short = MMU,
-  long  = Memory Management Unit,
-}
-\DeclareAcronym{CPU}{
-  short = CPU,
-  long  = Central Processor Unit,
-}
-\DeclareAcronym{FPU}{
-  short = FPU,
-  long  = Floating Point Unit,
-}
-\DeclareAcronym{RAM}{
-  short = RAM,
-  long  = Random Access Memory,
-}
-\DeclareAcronym{ROM}{
-  short = ROM,
-  long  = Read-Only Memory,
-}
-\DeclareAcronym{RTOS}{
-  short = RTOS,
-  long  = Real-Time Operating System,
-}
-\DeclareAcronym{SoC}{
-  short = SoC,
-  long  = System on Chip,
-}
-\DeclareAcronym{SLOB}{
-  short = SLOB,
-  long  = Simple List Of Blocks,
-}
+\usepackage{acronym}
 
 \begin{document}
 
@@ -91,14 +37,24 @@
 
 \chapter*{Список скорочень}
 \addcontentsline{toc}{chapter}{Список скорочень}
-\printacronyms[heading=none]{}
+\begin{acronym}[RTOSA]
+  \acro{CPU}{Central Processing Unit}
+  \acro{FPU}{Floating Point Unit}
+  \acro{MMU}{Memory Management Unit}
+  \acro{RAM}{Random Access Memory}
+  \acro{ROM}{Read-Only Memory}
+  \acro{RTOS}{Real-Time Operating System}
+  \acro{SLOB}{Simple List of Blocks}
+  \acro{SoC}{System on Chip}
+\end{acronym}
+% \printacronyms[heading=none]{}
 
 \chapter{Огляд існуючих рішень}
 \section{Embedded Linux}
 
 Ядро Linux\cite{linux} пропонує широкий набір функціоналу, серед якого можна знайти безліч драйверів, підтримка великої кількості файлових систем, широкий вибір планувальників і алокаторів пам'яті. Однак, для зниження системних вимог, доводиться відмовлятися від більшості функцій, що надає ядро Лінукс.
 
-Ядро Linux було портовано на велику кількість архітектур, в число яких входять такі як ARM, AVR32, MIPS, Xtensa. Ці архітектури використовуються у вбудованих системах. Однак Linux висуває досить високі вимоги до ресурсів системи. Мінімальний обсяг оперативної пам'яті, що вимагає система, дорівнює 4 мегабайтам, також Лінукс вимагає наявності MMU, що перешкоджає його використанню в системах на нижній границі потужностей.
+Ядро Linux було портовано на велику кількість архітектур, в число яких входять такі як ARM, AVR32, MIPS, Xtensa. Ці архітектури використовуються у вбудованих системах. Однак Linux висуває досить високі вимоги до ресурсів системи. Мінімальний обсяг оперативної пам'яті, що вимагає система, дорівнює 4 мегабайтам, також Лінукс вимагає наявності \ac{MMU}, що перешкоджає його використанню в системах на нижній границі потужностей.
 
 Незважаючи на це, Том Занусі модифікував ядро Лінукс і портував його на Intel Galileo\cite{linux-galileo}. Ця плата базована на мікроконтроллері Intel Quark SoC X1000, що має архітектуру Pentium і 512 кілобайт вбудованої оперативної пам'яті\cite{intel-galileo}.
 
