@@ -12,7 +12,7 @@
 
 \usepackage{seqsplit}
 
-% \usepackage[hyphens]{url}
+\usepackage[hyphens]{url}
 \usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}
 
 \sloppy
@@ -21,7 +21,14 @@
 
 \usepackage{acronym}
 
+\usepackage[nottoc]{tocbibind}
+\makeatletter
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
+
 \begin{document}
+
+\renewcommand\bibname{Список джерел}
 
 % \chapter{Технічне завдання для дипломного проекту}
 % \section{Найменування і область застосування}
@@ -37,15 +44,21 @@
 
 \chapter*{Список скорочень}
 \addcontentsline{toc}{chapter}{Список скорочень}
-\begin{acronym}[RTOSA]
+\begin{acronym}[TCP/IPA]
+  \acro{CAN}{Controller Area Network}
   \acro{CPU}{Central Processing Unit}
+  \acro{DOSFS}{FAT-based file system}
   \acro{FPU}{Floating Point Unit}
+  \acro{HRFS}{High Reliability File System}
   \acro{MMU}{Memory Management Unit}
+  \acro{NFS}{Network File System}
   \acro{RAM}{Random Access Memory}
   \acro{ROM}{Read-Only Memory}
   \acro{RTOS}{Real-Time Operating System}
   \acro{SLOB}{Simple List of Blocks}
   \acro{SoC}{System on Chip}
+  \acro{TCP/IP}{Transport Control Protocol/Internet Protocol}
+  \acro{USB}{Universal Serial Bus}
 \end{acronym}
 % \printacronyms[heading=none]{}
 
@@ -59,6 +72,16 @@
 Незважаючи на це, Том Занусі модифікував ядро Лінукс і портував його на Intel Galileo\cite{linux-galileo}. Ця плата базована на мікроконтроллері Intel Quark SoC X1000, що має архітектуру Pentium і 512 кілобайт вбудованої оперативної пам'яті\cite{intel-galileo}.
 
 Ядро розповсюджується під вільною ліцензією GPLv2.
+
+\section{VxWorks}
+
+VxWorks\cite{vxworks} це операційна система реального часу зозроблена як власницьке програмне забезпечення Wind River. VxWorks призначена для вбудованих систем реального часу, що вимагають детермінованої продуктивності, і часто, проходження сертифікації безпеки і захищенності.
+
+VxWorks підтримує архітектури Intel x86, MIPS, PowerPC, Freescale ColdFire, Intel i960, SPARC, Fujitsu FR-V, SH-4, ARM, StrongARM і xScale, і може працювати y режимах симетричної, асиметричної і змішаної багатопроцесорної обробки. Операційна система включає у себе багатозадачне ядро з витісняючим планувальником, засоби міжпроцесорної взаємодії і синхронізації, стек протоколів Bluetooth, \acs{TCP/IP}, \acs{USB}, \acs{CAN}, а також файлові системи \ac{HRFS}, \acs{DOSFS}, \ac{NFS}.
+
+Мінімальний обсяг оперативної пам'яті дорівнює 20-ти кілобайтам.
+
+VxWorks активно використовується в аерокосміній, захисній, автомобільній і робототехнічній галузях. Відомими прикладами використання є марсоходи Sojourner, Spirit, Opportunity\cite{vxworks:rovers}, загальна система ядра Boeing 787 Dreamliner\cite{vxworks:boeing}.
 
 \section{FreeRTOS}
 
@@ -74,15 +97,21 @@
   \item Обгортки навколо стандартної бібліотеки, що забезпечують взаємне виключення.
 \end{itemize}
 
+FreeRTOS має надзвичайно низькі вимоги до оперативної пам'яті. Планувальник вимагає 236 байт оперативної пам'яті, плюс 76 байти для кожної черги і 64 байти для кожної задачі.
+
 Ядро розповсюджується під модифікованою вільною ліцензією GPLv2\cite{freertos:license}. Модифікація дозволяє залишати закритим код додатків, що використовують FreeRTOS і розповсюджуються у вигляді виконуваного коду, а також забороняє використання FreeRTOS у еталонних теста. Також доступна комерційна підтримка і ліцензія під ім'ям OpenRTOS\cite{openrtos}.
 
-\section{VxWorks}
+\section{QNX Neutrino}
 
-VxWorks\cite{vxworks} це операційна система реального часу зозроблена як власницьке програмне забезпечення Wind River. VxWorks призначена для вбудованих систем реального часу, що вимагають детермінованої продуктивності, і часто, проходження сертифікації безпеки і захищенності.
+QNX\cite{qnx} це комерційна Unix-подібна операційна система спрямована в першу чергу на вбудовані системи. Операційна система має мікроядерну архітектуру. QNX Neutrino була портована на вилику кількість платформ і працює на Intel 8088, x86, MIPS, PowerPC, SH-4, ARM, StrongARM, XScale.
 
-VxWorks підтримує архітектури Intel (x86), MIPS, PowerPC, SH-4 і ARM, і може працювати в режимах симетричної, асиметричної і змішаному режимах багатопроцесорної обробки.
+Ядро QNX містить лише планувальник задач, міжпроцесну взаємодію, перенаправлення переривань і таймери. Все інше виконується як процеси рівня користувача, включаючи керування пам'яттю.
 
-\begin{thebibliography}{0}
+QNX має закриту ліцензію, але також має окрему ліцензію для академічного і некомерційного використання\cite{qnx:noncommercial}.
+
+% \section{Contiki}
+
+\begin{thebibliography}{00}
   \newcommand{\eresource}[2]{#1. [Електронний ресурс]. --- Режим доступу: \url{#2}}
 
   \bibitem{linux}
@@ -103,6 +132,15 @@ VxWorks підтримує архітектури Intel (x86), MIPS, PowerPC, SH
 
   \bibitem{vxworks}
     \eresource{VxWorks}{http://windriver.com/products/vxworks/}
+  \bibitem{vxworks:rovers}
+    \eresource{Inside NASA's Curiosity: It's an Apple Airport Extreme... with wheels | ExtremeTech}{http://www.extremetech.com/extreme/134041-inside-nasas-curiosity-its-an-apple-airport-extreme-with-wheels}
+  \bibitem{vxworks:boeing}
+    \eresource{787 Dreamliner (Common Core Systems) | Customers | AdaCore}{http://www.adacore.com/customers/787-dreamliner-common-core-system/}
+
+  \bibitem{qnx}
+    \eresource{QNX Neutrino RTOS}{http://www.qnx.com/products/neutrino-rtos/neutrino-rtos.html}
+  \bibitem{qnx:noncommercial}
+    \eresource{QNX Neutrino Realtime Operating System}{http://www.qnx.com/download/download.html?dlc=proc&newsearch=yes&searchme=non-commercial&p=1&sort=bydate&sorttype=desc&searchdate=alltime}
 \end{thebibliography}
 
 \end{document}
