@@ -1,33 +1,22 @@
 %\nonstopmode{}
 \documentclass[oneside,final,14pt]{extreport}
-% not sure it's needed
-%\usepackage{cmap}
-%\usepackage[T1,T2A]{fontenc}
 \usepackage[english,ukrainian]{babel}
 \usepackage{fontspec}
 \usepackage{polyglossia}
+
+\defaultfontfeatures{Ligatures={TeX,Historic}}
+\setmainfont{Times New Roman}
+\setsansfont{Comic Sans MS}
+\setmonofont{Courier New}
+
 \newfontfamily\ukrainianfont[Script=Cyrillic]{Times New Roman}
 \newfontfamily\cyrillicfont{Times New Roman}
 \newfontfamily\cyrillicfonttt{Courier New}
+
 \setmainlanguage{ukrainian}
 \setotherlanguage{english}
-\defaultfontfeatures{Ligatures={TeX},Renderer=Basic}
-\setmainfont[Ligatures={TeX,Historic}]{Times New Roman}
-\setsansfont{Comic Sans MS}
-\setmonofont{Courier New}
-%\setmainfont{lmroman10-regular.otf}
-%\usepackage[utf8]{inputenc}
-
 
 \usepackage{indentfirst}
-
-% Times New Roman
-% Note however, that times package is deprecated. Use any of the following commands instead.
-%\usepackage{times}
-%\usepackage{mathptmx}
-%\renewcommand{\rmdefault}{ftm}
-%\usepackage{fontspec}
-%\setmainfont{Times New Roman}
 
 % single space between sentences
 \frenchspacing
