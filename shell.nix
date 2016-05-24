@@ -5,6 +5,13 @@ let
     scheme-full
     metafont
     collection-fontsrecommended
+    collection-latexrecommended
+    collection-fontsextra
+    # acronym bigfoot xstring
+    # titlesec
+    # tocloft
+    # tocbibind
+    # collection-langcyrillic
     ;
   };
 in rec {
