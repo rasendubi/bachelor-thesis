@@ -1,15 +1,15 @@
 %\nonstopmode{}
-\documentclass[oneside,final,14pt]{extreport}
+\documentclass[oneside,14pt,a4paper,final]{extreport}
 \usepackage[english,ukrainian]{babel}
 \usepackage{fontspec}
 \usepackage{polyglossia}
 
-\defaultfontfeatures{Ligatures={TeX,Historic}}
+\defaultfontfeatures{Ligatures={TeX}}
 \setmainfont{Times New Roman}
 \setsansfont{Comic Sans MS}
 \setmonofont{Courier New}
 
-\newfontfamily\ukrainianfont[Script=Cyrillic]{Times New Roman}
+%\newfontfamily\ukrainianfont{Times New Roman}
 \newfontfamily\cyrillicfont{Times New Roman}
 \newfontfamily\cyrillicfonttt{Courier New}
 
@@ -36,7 +36,7 @@
 \titleformat{\chapter}[hang]{\filcenter}{\bfseries\MakeUppercase{\chaptertitlename} \thechapter. }{0pt}{\bfseries\MakeUppercase}{}
 \titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
-\titlespacing*{\chapter}{0pt}{-30pt}{8pt}
+%\titlespacing*{\chapter}{0pt}{-30pt}{8pt}
 % these were {*4}{*4}
 \titlespacing*{\section}{\parindent}{*2}{*2}
 \titlespacing*{\subsection}{\parindent}{*2}{*2}
@@ -82,7 +82,7 @@
 
 \begin{document}
 
-\renewcommand\bibname{Список використаної літератури}
+\renewcommand\bibname{Список використаних джерел}
 
 % \chapter{Технічне завдання для дипломного проекту}
 % \section{Найменування і область застосування}
