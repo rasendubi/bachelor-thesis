@@ -1,4 +1,4 @@
-%\nonstopmode{}
+\nonstopmode{}
 \documentclass[oneside,14pt,a4paper,final]{extreport}
 \usepackage[english,ukrainian]{babel}
 \usepackage{fontspec}
@@ -78,6 +78,48 @@
 \usepackage[nottoc]{tocbibind}
 \makeatletter
 \renewcommand\@biblabel[1]{#1.}
+\makeatother
+
+\textwidth=175mm
+\textheight=260mm
+\oddsidemargin=-.4mm
+\headsep=5mm
+
+\topmargin=-1in
+\unitlength=1mm
+
+%\usepackage{xltxtra}
+
+% https://bitbucket.org/fat_angel/opengostfont/downloads
+\newfontfamily{\GostA}[AutoFakeSlant=0.4,Path=fonts/,Numbers=Uppercase,Scale=MatchLowercase,Ligatures=NoCommon]{OpenGostTypeA-Regular}
+\newfontfamily{\GostB}[AutoFakeSlang=0.4,Path=fonts/,Numbers=Uppercase,Scale=0.90]{OpenGostTypeB-Regular}
+
+\def\VL{\line(0,1){15}}
+\def\HL{\line(1,0){185}}
+\def\Box#1#2{\makebox(#1,5){#2}}
+\def\simpleGrad{\sl\small\noindent\hbox to 0pt{%
+    \vbox to 0pt{%
+      \noindent\begin{picture}(185,287)(5,0)
+      \linethickness{0.3mm}
+      \put(0,0){\framebox(185,287){}}
+      \put(0,0){\Box{7}{\GostB Лит.}}
+      \put(0,15)\HL
+      \multiput(0,5)(0,5){2}{\line(1,0){65}}
+      \put(7,0){\VL\Box{10}{\GostB Изм.}}
+      \put(17,0){\VL\Box{23}{\GostB\No~докум.}}
+      \put(40,0){\VL\Box{15}{\GostB Подп.}}
+      \put(55,0){\VL\Box{10}{\GostB Дата}}
+      \put(65,0){\VL\makebox(110,15){\large\sc код}}
+      \put(175,0){\VL\makebox(10,10){\GostA\normalsize\thepage}}
+      \put(175,10){\line(1,0){10}}
+      \end{picture}
+    }
+  }
+}
+
+\makeatletter
+\def\@oddhead{\simpleGrad}
+\def\@oddfoot{}
 \makeatother
 
 \begin{document}
