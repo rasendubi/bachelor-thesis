@@ -91,25 +91,42 @@
 %\usepackage{xltxtra}
 
 % https://bitbucket.org/fat_angel/opengostfont/downloads
-\newfontfamily{\GostA}[AutoFakeSlant=0.4,Path=fonts/,Numbers=Uppercase,Scale=MatchLowercase,Ligatures=NoCommon]{OpenGostTypeA-Regular}
-\newfontfamily{\GostB}[AutoFakeSlang=0.4,Path=fonts/,Numbers=Uppercase,Scale=0.90]{OpenGostTypeB-Regular}
+\newfontfamily{\GostA}[
+  Path=fonts/,
+  SlantedFont=OpenGostTypeA-Regular,
+  SlantedFeatures={FakeSlant=0.25},
+  Numbers=Uppercase,
+  Scale=MatchLowercase,
+  Ligatures=NoCommon
+]{OpenGostTypeA-Regular}
+\newfontfamily{\GostB}[
+  Path=fonts/,
+  SlantedFont=OpenGostTypeB-Regular,
+  SlantedFeatures={FakeSlant=0.25},
+  Numbers=Uppercase,
+  Scale=0.90
+]{OpenGostTypeB-Regular}
 
 \def\VL{\line(0,1){15}}
 \def\HL{\line(1,0){185}}
-\def\Box#1#2{\makebox(#1,5){#2}}
+\def\Box#1#2{\parbox[top][5mm][t]{#1}{\centering #2}}
 \def\simpleGrad{\sl\small\noindent\hbox to 0pt{%
     \vbox to 0pt{%
       \noindent\begin{picture}(185,287)(5,0)
-      \linethickness{0.3mm}
+      \linethickness{0.5mm}
       \put(0,0){\framebox(185,287){}}
-      \put(0,0){\Box{7}{\GostB Лит.}}
+      \put(0,0){\Box{7mm}{\GostB Змн.}}
       \put(0,15)\HL
-      \multiput(0,5)(0,5){2}{\line(1,0){65}}
-      \put(7,0){\VL\Box{10}{\GostB Изм.}}
-      \put(17,0){\VL\Box{23}{\GostB\No~докум.}}
-      \put(40,0){\VL\Box{15}{\GostB Подп.}}
-      \put(55,0){\VL\Box{10}{\GostB Дата}}
-      \put(65,0){\VL\makebox(110,15){\large\sc код}}
+      \put(0,5){\line(1,0){65}}
+      \linethickness{0.3mm}
+      \put(0,10){\line(1,0){65}}
+      \linethickness{0.5mm}
+      \put(7,0){\VL\Box{10mm}{\GostB Арк.}}
+      \put(17,0){\VL\Box{23mm}{\GostB \No~докум.}}
+      \put(40,0){\VL\Box{15mm}{\GostB Підпис}}
+      \put(55,0){\VL\Box{10mm}{\GostB Дата}}
+      \put(65,0){\VL\makebox(110,15){\large\sc\GostB БЛА.20123.2342.ПЗ}}
+      \put(175,10){\Box{10mm}{\GostB Арк.}}
       \put(175,0){\VL\makebox(10,10){\GostA\normalsize\thepage}}
       \put(175,10){\line(1,0){10}}
       \end{picture}
