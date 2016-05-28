@@ -132,8 +132,22 @@
 % GOST frames
 \unitlength=1mm
 
+% renewcommand when stamp code changes
+\newcommand\stampcode{}
+
 \def\VL{\line(0,1){15}}
 \def\Box#1#2{\parbox[top][5mm][t]{#1}{\centering #2}}
+
+\def\firstGrad{\small\noindent\hbox to 0pt{%
+    \vbox to 0pt{%
+      \noindent\begin{picture}(185,287)(10,0)
+      \linethickness{0.5mm}
+      \put(0,0){\framebox(185,287){}}
+      \put(0,0){\Box{7mm}{\sl\GostB бла}}
+    }
+  }
+}
+
 \def\simpleGrad{\small\noindent\hbox to 0pt{%
     \vbox to 0pt{%
       \noindent\begin{picture}(185,287)(10,0)
@@ -149,7 +163,7 @@
       \put(17,0){\VL\Box{23mm}{\sl\GostB \No~докум.}}
       \put(40,0){\VL\Box{15mm}{\sl\GostB Підпис}}
       \put(55,0){\VL\Box{10mm}{\sl\GostB Дата}}
-      \put(65,0){\VL\makebox(110,15){\large\GostA БЛА.20123.2342.ПЗ}}
+      \put(65,0){\VL\makebox(110,15){\large\GostA\stampcode}}
       \put(175,10){\Box{10mm}{\sl\GostB Арк.}}
       \put(175,0){\VL\makebox(10,10){\sl\GostA\normalsize\thepage}}
       \put(175,10){\line(1,0){10}}
@@ -170,6 +184,7 @@
 
 \begin{document}
 
+\renewcommand\stampcode{ИАЛЦ.467100.002.ПЗ}
 % Set name for bibliography
 %
 % Should be done from within the document environment
