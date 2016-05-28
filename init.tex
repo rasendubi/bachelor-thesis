@@ -36,16 +36,10 @@
 \titleformat{\chapter}[hang]{\filcenter}{\bfseries\MakeUppercase{\chaptertitlename} \thechapter. }{0pt}{\bfseries\MakeUppercase}{}
 \titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
-%\titlespacing*{\chapter}{0pt}{-30pt}{8pt}
+\titlespacing*{\chapter}{0pt}{0pt}{\baselineskip}
 % these were {*4}{*4}
 \titlespacing*{\section}{\parindent}{*2}{*2}
 \titlespacing*{\subsection}{\parindent}{*2}{*2}
-
-\usepackage[a4paper]{geometry}
-\geometry{left=3cm}
-\geometry{right=1.5cm}
-\geometry{top=2.4cm}
-\geometry{bottom=2.4cm}
 
 \usepackage{tocloft}
 
@@ -80,13 +74,23 @@
 \renewcommand\@biblabel[1]{#1.}
 \makeatother
 
-\textwidth=175mm
-\textheight=260mm
-\oddsidemargin=-.4mm
-\headsep=5mm
+% A4: 210 297
+% 185 - 20 = 165
+\textwidth=165mm
+% 287-15 - 20 = 252
+\textheight=252mm
+%\oddsidemargin=-.4mm
 
-\topmargin=-1in
+% 210(page) - 185(frame) - 5(right margin) + 10(text padding)
+\oddsidemargin=30mm
+\headheight=0mm
+\headsep=10mm
+
+\topmargin=1.5mm
 \unitlength=1mm
+
+\hoffset=-1in
+\voffset=-1in
 
 %\usepackage{xltxtra}
 
@@ -112,11 +116,11 @@
 \def\Box#1#2{\parbox[top][5mm][t]{#1}{\centering #2}}
 \def\simpleGrad{\sl\small\noindent\hbox to 0pt{%
     \vbox to 0pt{%
-      \noindent\begin{picture}(185,287)(5,0)
+      \noindent\begin{picture}(185,287)(10,0)
       \linethickness{0.5mm}
       \put(0,0){\framebox(185,287){}}
       \put(0,0){\Box{7mm}{\GostB Змн.}}
-      \put(0,15)\HL
+      \put(0,15){\line(1,0){185}}
       \put(0,5){\line(1,0){65}}
       \linethickness{0.3mm}
       \put(0,10){\line(1,0){65}}
@@ -140,7 +144,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-\lhead{ \fancyplain{left}{\simpleGrad} }
+\lhead{\simpleGrad}
 
 \begin{document}
 
@@ -156,6 +160,7 @@
 % \subsection{Вимоги до програмного забезпечення}
 % \section{Етапи розробки}
 
+\enlargethispage{-50mm}
 \tableofcontents
 
 \chapter*{Список скорочень}
@@ -179,7 +184,6 @@
 % \printacronyms[heading=none]{}
 
 \chapter{Огляд існуючих рішень}
-\enlargethispage{-50mm}
 \section{Embedded Linux}
 
 Ядро Linux\cite{linux} пропонує широкий набір функціоналу, серед якого можна знайти безліч драйверів, підтримка великої кількості файлових систем, широкий вибір планувальників і алокаторів пам'яті. Однак, для зниження системних вимог, доводиться відмовлятися від більшості функцій, що надає ядро Лінукс.
