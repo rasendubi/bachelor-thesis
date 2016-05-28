@@ -139,7 +139,7 @@
       \noindent\begin{picture}(185,287)(10,0)
       \linethickness{0.5mm}
       \put(0,0){\framebox(185,287){}}
-      \put(0,0){\Box{7mm}{\GostB Змн.}}
+      \put(0,0){\Box{7mm}{\sl\GostB Змн.}}
       \put(0,15){\line(1,0){185}}
       \put(0,5){\line(1,0){65}}
       \linethickness{0.3mm}
@@ -166,6 +166,7 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
+\newcommand{\specialchapter}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
 
 \begin{document}
 
@@ -187,8 +188,7 @@
 \enlargethispage{-50mm}
 \tableofcontents
 
-\chapter*{Список скорочень}
-\addcontentsline{toc}{chapter}{Список скорочень}
+\specialchapter{Список скорочень}
 \begin{acronym}[TCP/IPA]
   \acro{CAN}{Controller Area Network}
   \acro{CPU}{Central Processing Unit}
