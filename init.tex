@@ -142,12 +142,54 @@
 \def\VL{\line(0,1){15}}
 \def\Box#1#2{\parbox[top][5mm][t]{#1}{\centering #2}}
 
+\newcommand\thin{\linethickness{0.3mm}}
+\newcommand\thick{\linethickness{0.5mm}}
 \def\firstGrad{\small\noindent\hbox to 0pt{%
     \vbox to 0pt{%
       \noindent\begin{picture}(185,287)(10,0)
-      \linethickness{0.5mm}
-      \put(0,0){\framebox(185,287){}}
-      \put(0,0){\Box{7mm}{\sl\GostB бла}}
+      \thick\put(0,0){\framebox(185,287){}}
+
+      \thin \put(0,5){\line(1,0){65}}
+      \thin \put(0,10){\line(1,0){65}}
+      \thin \put(0,15){\line(1,0){65}}
+      \thin \put(0,20){\line(1,0){65}}
+      \thick\put(0,25){\line(1,0){185}}
+      \thick\put(0,30){\line(1,0){65}}
+      \thin \put(0,35){\line(1,0){65}}
+      \thick\put(0,40){\line(1,0){185}}
+
+      \thick\put(135,15){\line(1,0){50}}
+      \thick\put(135,20){\line(1,0){50}}
+
+      \thick
+      \put(7,40){\line(0,-1){15}}
+      \put(17,40){\line(0,-1){40}}
+      \put(40,40){\line(0,-1){40}}
+      \put(55,40){\line(0,-1){40}}
+      \put(65,40){\line(0,-1){40}}
+      \put(135,25){\line(0,-1){25}}
+      \put(150,25){\line(0,-1){10}}
+      \put(165,25){\line(0,-1){10}}
+
+      \thin
+      \put(140,20){\line(0,-1){5}}
+      \put(145,20){\line(0,-1){5}}
+
+      \put(1,0){\Box{17mm}{\raggedright \sl\GostB Затверд.}}
+      \put(1,5){\Box{17mm}{\raggedright \sl\GostB Н. Контр.}}
+      \put(1,15){\Box{17mm}{\raggedright \sl\GostB Перевір.}}
+      \put(1,20){\Box{17mm}{\raggedright \sl\GostB Розроб.}}
+
+      \put(0,25){\Box{7mm}{\sl\GostB Змн.}}
+      \put(7,25){\Box{10mm}{\sl\GostB Арк.}}
+      \put(17,25){\Box{23mm}{\sl\GostB \No~докум.}}
+      \put(40,25){\Box{15mm}{\sl\GostB Підпис}}
+      \put(55,25){\Box{10mm}{\sl\GostB Дата}}
+
+      \put(135,20){\Box{15mm}{\sl\GostB Літ.}}
+      \put(150,20){\Box{15mm}{\sl\GostB Арк.}}
+      \put(165,20){\Box{20mm}{\sl\GostB Аркушів}}
+      \end{picture}
     }
   }
 }
@@ -168,9 +210,10 @@
       \put(40,0){\VL\Box{15mm}{\sl\GostB Підпис}}
       \put(55,0){\VL\Box{10mm}{\sl\GostB Дата}}
       \put(65,0){\VL\makebox(110,15){\large\GostA\stampcode}}
-      \put(175,10){\Box{10mm}{\sl\GostB Арк.}}
-      \put(175,0){\VL\makebox(10,10){\sl\GostA\normalsize\thepage}}
-      \put(175,10){\line(1,0){10}}
+%\def\Box#1#2{\parbox[top][5mm][t]{#1}{\centering #2}}
+      \put(175,8){\parbox[top][7mm][t]{10mm}{\centering \sl\GostB Арк.}}
+      \put(175,0){\VL\makebox(10,8){\sl\GostA\normalsize\thepage}}
+      \put(175,8){\line(1,0){10}}
       \end{picture}
     }
   }
@@ -178,17 +221,34 @@
 
 % insert GOST frames into headers
 \usepackage{fancyhdr}
-\pagestyle{fancyplain}
-\fancyhf{}
-\lhead{\simpleGrad}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lhead{\firstGrad}
+}
+
+\fancypagestyle{normal}{%
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \lhead{\simpleGrad}
+}
+
+\pagestyle{normal}
+
+\newcommand{\newpart}[1]{
+  \clearpage
+  \enlargethispage{-25mm}
+  \renewcommand\stampcode{#1}
+  \thispagestyle{plain}
+}
 
 \newcommand{\specialchapter}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
 
 \begin{document}
 
-\renewcommand\stampcode{ИАЛЦ.467100.002.ПЗ}
 % Set name for bibliography
 %
 % Should be done from within the document environment
@@ -204,7 +264,7 @@
 % \subsection{Вимоги до програмного забезпечення}
 % \section{Етапи розробки}
 
-\enlargethispage{-50mm}
+\newpart{ИАЛЦ.467100.002.ПЗ}
 \tableofcontents
 
 \specialchapter{Список скорочень}
@@ -273,7 +333,6 @@ QNX\cite{qnx} це комерційна Unix-подібна операційна
 QNX має закриту ліцензію, але також має окрему ліцензію для академічного і некомерційного використання\cite{qnx:noncommercial}.
 
 % \section{Contiki}
-
 \begin{thebibliography}{00}
   \bibitem{linux}
     \eresource{Linux.com | The source for Linux information}{https://linux.com/}

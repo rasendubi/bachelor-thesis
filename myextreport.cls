@@ -19,7 +19,7 @@
 %% but WITHOUT ANY WARRANTY; without even the implied warranty of 
 %% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{myextreport}
+\ProvidesClass{extreport}
               [1996/10/08 v1.0
  Non Standard LaTeX document class]
 \newcommand\@ptsize{}
@@ -246,7 +246,7 @@
       \global\@topnum\z@   % Prevents figures from going at top of page.
       \@maketitle
     \fi
-    \thispagestyle{plain}\@thanks
+    \@thanks
   \endgroup
   \setcounter{footnote}{0}%
   \global\let\thanks\relax
@@ -303,7 +303,7 @@
   \else
     \clearpage
   \fi
-  \thispagestyle{plain}%
+  %
   \if@twocolumn
     \onecolumn
     \@tempswatrue
@@ -347,7 +347,7 @@
                 \twocolumn
               \fi}
 \newcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
-                    \thispagestyle{plain}%
+                    %
                     \global\@topnum\z@
                     \@afterindentfalse
                     \secdef\@chapter\@schapter}
@@ -689,7 +689,7 @@
                 \twocolumn[\@makeschapterhead{\indexname}]%
                 \@mkboth{\MakeUppercase\indexname}%
                         {\MakeUppercase\indexname}%
-                \thispagestyle{plain}\parindent\z@
+                \parindent\z@
                 \parskip\z@ \@plus .3\p@\relax
                 \let\item\@idxitem}
                {\if@restonecol\onecolumn\else\clearpage\fi}

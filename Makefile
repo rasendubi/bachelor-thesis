@@ -1,4 +1,4 @@
-init.pdf: init.tex shell.nix Makefile
+init.pdf: init.tex shell.nix Makefile myextreport.cls
 	xelatex init.tex && xelatex init.tex
 
 .PHONY: clean
