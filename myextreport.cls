@@ -19,7 +19,7 @@
 %% but WITHOUT ANY WARRANTY; without even the implied warranty of 
 %% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{extreport}
+\ProvidesClass{myextreport}
               [1996/10/08 v1.0
  Non Standard LaTeX document class]
 \newcommand\@ptsize{}
