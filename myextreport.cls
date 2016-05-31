@@ -346,7 +346,7 @@
               \if@tempswa
                 \twocolumn
               \fi}
-\newcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+\newcommand\chapter{\if@openright\cleardoublepage\else\newpage\fi
                     %
                     \global\@topnum\z@
                     \@afterindentfalse
