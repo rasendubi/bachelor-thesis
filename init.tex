@@ -64,13 +64,16 @@
 % Table of content customization
 \usepackage{tocloft}
 
+% Don't hyphenate chapter names
+\usepackage{hyphenat}
+
 % This block is a dirty hack to make TOC entries uppercase
 %
 % Well, know when I forked the document class can I make this change in
 % the class itself.
 \usepackage{etoolbox}
 \makeatletter
-\patchcmd{\l@chapter}{#1}{\MakeUppercase{#1}}{}{}
+\patchcmd{\l@chapter}{#1}{\MakeUppercase{\nohyphens{#1}}}{}{}
 \makeatother
 
 % Table of content customization
@@ -224,7 +227,6 @@
       \put(40,0){\VL\Box{15mm}{\sl\GostB Підпис}}
       \put(55,0){\VL\Box{10mm}{\sl\GostB Дата}}
       \put(65,0){\VL\makebox(110,15){\large\GostA\stampcode}}
-%\def\Box#1#2{\parbox[top][5mm][t]{#1}{\centering #2}}
       \put(175,8){\parbox[top][7mm][t]{10mm}{\centering \sl\GostB Арк.}}
       \put(175,0){\VL\makebox(10,8){\sl\GostA\normalsize\thepage}}
       \put(175,8){\line(1,0){10}}
@@ -254,7 +256,6 @@
 
 \newcommand{\finalizepart}{
   \label{\lastpagelabel{}}
-  \clearpage
 }
 \newcommand{\newpart}[2]{
   \finalizepart{}
@@ -268,6 +269,11 @@
 \AtEndDocument{\finalizepart{}}
 
 \newcommand{\specialchapter}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
+\newcommand{\specialsection}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+
+\newcommand{\chapterconslusions}{
+  \specialsection{Висновки до розділу \thechapter}
+}
 
 \begin{document}
 
@@ -314,6 +320,9 @@
 У рамках даної бакалаврської роботи ставиться завдання розробити систему управління для пристроїв з мінімальним обсягом пам'яті. Головною метою роботи є розробка такої системи для мікроконтроллера STM32F407VGT6, що має має 192 Кб оперативної пам'яті. Однак, система має використовувати мінімум оперативної пам'яті і бути легко портованою на значно менш потужні мікроконтролери. Додатковою метою ставить оцінка сучасних інструментів, зокрема мов програмування, у рамках створення програмного забезпечення для вбудованих пристроїв.
 
 При створенні програмного продукту було пройдено повний цикл його написання -- від постановки завдання, написання технічного завдання і вимог до продукту, до написання програмного забезпечення та тестування.
+
+\chapter{Операційні системи для вбудованих пристроїв}
+\section{Загальні положення}
 
 \chapter{Огляд існуючих рішень}
 \section{Embedded Linux}
@@ -363,6 +372,16 @@ QNX\cite{qnx} це комерційна Unix-подібна операційна
 QNX має закриту ліцензію, але також має окрему ліцензію для академічного і некомерційного використання\cite{qnx:noncommercial}.
 
 % \section{Contiki}
+
+\chapter{Аналіз і вибір мови програмування}
+\section{Загальні вимоги}
+\section{C}
+\section{C++}
+\section{Idris}
+\section{Nim}
+\section{Rust}
+\chapterconslusions{}
+
 \begin{thebibliography}{00}
   \bibitem{linux}
     \eresource{Linux.com | The source for Linux information}{https://linux.com/}
