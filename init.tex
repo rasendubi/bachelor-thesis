@@ -51,6 +51,9 @@
 % titles formatting
 \usepackage{titlesec}
 \titleformat{\chapter}[display]{\filcenter}{\bfseries\MakeUppercase{\chaptertitlename} \thechapter}{0pt}{\bfseries\MakeUppercase}{}
+% in case previous setup was right
+%\titleformat{\chapter}[hang]{\filcenter}{\bfseries\MakeUppercase{\chaptertitlename} \thechapter. }{0pt}{\bfseries\MakeUppercase}{}
+
 \titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titlespacing*{\chapter}{0pt}{0pt}{\baselineskip}
