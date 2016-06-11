@@ -1,5 +1,5 @@
 init.pdf: init.tex shell.nix Makefile myextreport.cls
-	xelatex init.tex && xelatex init.tex
+	xelatex --synctex=1 init.tex && xelatex --synctex=1 init.tex
 
 .PHONY: clean
 clean:
