@@ -181,7 +181,7 @@
 \newcommand{\stampnormativecontrol}{Симоненко~В.П.}
 \newcommand{\stampapproved}{Луцький~Г.М.}
 
-\newcommand\stampname{Система управління для вбудованих пристроїв з мінімальним обсягом пам'яті}
+\newcommand{\stampname}{Система управління для вбудованих пристроїв з мінімальним обсягом пам'яті}
 \newcommand\stamppartname{Пояснювальна записка}
 
 \def\VL{\line(0,1){15}}
@@ -377,9 +377,32 @@
   \enlargethispage{-25mm}
 }
 
+% underlines with \uline
+\usepackage[normalem]{ulem}
+
+\newcommand\mypagefooter{Київ -- 2016}
+
 \begin{document}
 
+\enlargethispage{-25mm}
+
+\subfile{intro}
+
 \subfile{explanatory-note}
+
+\begin{specialpage}
+  \vspace*{\fill}
+
+  \textbf{\large
+  ДОДАТКИ\\
+  до дипломного проекту
+  }
+
+  \vspace{10mm}
+  на тему: \uline{<<Система управління для вбудованих пристроїв з мінімальним обсягом пам'яті>>}
+
+  \vfill
+\end{specialpage}
 
 \subfile{appendix-b}
 
