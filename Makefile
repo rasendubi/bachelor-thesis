@@ -1,6 +1,6 @@
-init.pdf: init.tex shell.nix Makefile myextreport.cls
-	xelatex --synctex=1 init.tex && xelatex --synctex=1 init.tex
+init.pdf: main.tex explanatory-note.tex shell.nix Makefile myextreport.cls
+	xelatex --synctex=1 main.tex && xelatex --synctex=1 main.tex
 
 .PHONY: clean
 clean:
-	rm -f init.aux init.log init.out init.pdf init.toc
+	rm -f *.aux *.log *.out *.pdf *.toc
