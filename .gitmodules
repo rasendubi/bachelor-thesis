@@ -1,0 +1,3 @@
+[submodule "bkernel"]
+	path = bkernel
+	url = https://github.com/rasendubi/bkernel.git

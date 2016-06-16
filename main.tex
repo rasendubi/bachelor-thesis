@@ -355,8 +355,17 @@
 \newcommand\code[1]{{\tt #1}}
 %\newcommand\code[1]{#1}
 
+\DeclareCaptionFormat{listing}{%
+  % print only filename
+  \parbox{\textwidth}{#3}
+}
+
+\captionsetup[lstlisting]{ format=listing }
+
 \begin{document}
 
 \subfile{explanatory-note}
+
+\subfile{appendix-b}
 
 \end{document}

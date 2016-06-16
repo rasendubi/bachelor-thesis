@@ -1,0 +1,46 @@
+\documentclass[main.tex]{subfiles}
+
+\lstset{%
+  breakatwhitespace=true,
+  breaklines=true,
+  keepspaces=true,
+  basicstyle=\footnotesize\ttfamily,
+  title=hi \lstname,
+}
+
+\begin{document}
+
+\newpart{appendixb}{ІАЛЦ.467100.007.Д4}
+\renewcommand\stamppartname{Лістинг програми}
+
+\begin{singlespacing}
+
+  \lstinputlisting[
+    caption=smalloc/lib.rs,
+    firstline=79,
+    lastline=384,
+  ]{bkernel/smalloc/lib.rs}
+
+  \lstinputlisting[
+    caption=bscheduler/lib.rs,
+    firstline=13,
+    lastline=174,
+  ]{bkernel/bscheduler/lib.rs}
+
+  \lstinputlisting[
+    caption=stm32f4/volatile.rs,
+  ]{bkernel/stm32f4/volatile.rs}
+
+  \lstinputlisting[
+    caption=src/terminal.rs,
+  ]{bkernel/src/terminal.rs}
+
+  \lstinputlisting[
+    caption=src/lib.rs,
+  ]{bkernel/src/lib.rs}
+
+\end{singlespacing}
+
+\finalizepart{}
+
+\end{document}
