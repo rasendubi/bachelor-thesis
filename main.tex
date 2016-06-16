@@ -138,6 +138,8 @@
 % Add command for referencing electronic resources
 \newcommand{\eresource}[2]{#1. [Електронний ресурс]. --- Режим доступу: \url{#2}}
 
+\usepackage{geometry}
+
 % text geometry
 \hoffset=-1in
 \voffset=-1in
@@ -315,6 +317,7 @@
 
 \newcommand{\finalizepart}{
   \label{\lastpagelabel{}}
+  \clearpage
 }
 \newcommand{\newpart}[2]{
   \finalizepart{}
@@ -361,6 +364,18 @@
 }
 
 \captionsetup[lstlisting]{ format=listing }
+
+\newenvironment{specialpage}{
+  \thispagestyle{empty}
+  \enlargethispage{45mm}
+  \begin{center}
+}{
+  \end{center}
+  \clearpage
+  \setcounter{page}{1}
+  \thispagestyle{plain}
+  \enlargethispage{-25mm}
+}
 
 \begin{document}
 
