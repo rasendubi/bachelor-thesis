@@ -4,16 +4,6 @@
 
 %\renewcommand\stamppartname{Лістинг програми}
 %\newpart{blah}{ІАЛЦ.467100.000.FFFF}
-
-\newcommand\fillin[2][]{%
-  \ifthenelse{\isempty{#1}}{%
-    \uline{#2}%
-  }{% The number is random guess
-    \raisebox{-0.71\baselineskip}[\baselineskip][\baselineskip]{%
-    %\raisebox{-0.473\baselineskip}[0pt][\baselineskip]{%
-      \shortstack{\uline{\smash{#2}}\\\scriptsize#1}}%
-  }%
-}
 \begin{specialpage}
   \MakeUppercase{\textbf{Національний технічний університет України <<Київський політехнічний інститут>>}}\\
   \vspace{2mm}
@@ -42,14 +32,14 @@
   з напряму підготовки \fillin[(код і назва)]{\hspace{2.5cm}6.010305 <<Програмна інженерія>>}\uline{\hfill\mbox{}}\\
   на тему: \fillin{Система управління для вбудованих пристроїв з мінімальним\hfill\mbox{}}\\
   \fillin{обсягом пам'яті\hfill\mbox{}}\\
-  \underline{\hspace{\textwidth}}
+  \uline{\mbox{}\hfill\mbox{}}
 
   \vspace{1cm}
 
   Виконав: студент \fillin{\space 4\space} курсу, групи \fillin[(шифр групи)]{\space\space ІП-22\space\space}\\
   \fillin[(прізвище, ім'я, по-батькові)]{\hspace{3cm} Шмалько Олексій Олександрович\hspace{3cm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}\\
   Керівник \fillin[(посада, науковий ступінь, вчене звання, прізвище та ініціали)]{\hspace{2cm}доц. каф. ОТ, к.т.н. Верба О.А.\hspace{2cm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}\\
-  Консультант нормоконтроль \fillin[(посада, науковий ступінь, вчене звання, прізвище та ініціали)]{\hspace{0.5cm} д.т.н., проф., Симоненко В.П.\hspace{5mm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}
+  Консультант нормоконтролю \fillin[(посада, науковий ступінь, вчене звання, прізвище та ініціали)]{\hspace{0.5cm} д.т.н., проф., Симоненко В.П.\hspace{5mm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}
   Рецензент \fillin[(посада, науковий ступінь, вчене звання, прізвище та ініціали)]{\hspace{17mm}\phantom{доц. каф. ОТ, к.т.н. Верба О.А.}\hspace{2cm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}\\
   \end{flushleft}
 

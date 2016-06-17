@@ -383,6 +383,20 @@
 % underlines with \uline
 \usepackage[normalem]{ulem}
 
+\newcommand\fillin[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \uline{#2}%
+  }{% The number is random guess
+    \raisebox{-0.71\baselineskip}[\baselineskip][\baselineskip]{%
+    %\raisebox{-0.473\baselineskip}[0pt][\baselineskip]{%
+      \shortstack{\uline{\smash{#2}}\\\scriptsize#1}}%
+  }%
+}
+
+\usepackage{multirow}
+\usepackage{array}
+\setlength{\arrayrulewidth}{0.4mm}
+
 \newcommand\mypagefooter{Київ -- 2016 року}
 
 \usepackage{xifthen}
@@ -392,6 +406,10 @@
 \enlargethispage{-25mm}
 
 \subfile{intro}
+
+\subfile{vp}
+
+\subfile{task}
 
 \subfile{explanatory-note}
 
