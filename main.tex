@@ -366,8 +366,11 @@
 \captionsetup[lstlisting]{ format=listing }
 
 \newenvironment{specialpage}{
+  \clearpage
   \thispagestyle{empty}
-  \enlargethispage{45mm}
+  \enlargethispage{20mm}
+  %\enlargethispage{45mm}
+  \singlespacing
   \begin{center}
 }{
   \end{center}
@@ -380,7 +383,9 @@
 % underlines with \uline
 \usepackage[normalem]{ulem}
 
-\newcommand\mypagefooter{Київ -- 2016}
+\newcommand\mypagefooter{Київ -- 2016 року}
+
+\usepackage{xifthen}
 
 \begin{document}
 

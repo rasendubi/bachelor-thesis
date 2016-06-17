@@ -5,17 +5,68 @@
 %\renewcommand\stamppartname{Лістинг програми}
 %\newpart{blah}{ІАЛЦ.467100.000.FFFF}
 
+\newcommand\fillin[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \uline{#2}%
+  }{% The number is random guess
+    \raisebox{-0.71\baselineskip}[\baselineskip][\baselineskip]{%
+    %\raisebox{-0.473\baselineskip}[0pt][\baselineskip]{%
+      \shortstack{\uline{\smash{#2}}\\\scriptsize#1}}%
+  }%
+}
 \begin{specialpage}
   \MakeUppercase{\textbf{Національний технічний університет України <<Київський політехнічний інститут>>}}\\
-  \underline{Факультет інформатики та обчислювальної техніки}\\
-  \underline{Кафедра обчислювальної техніки}
+  \vspace{2mm}
+  \underline{\smash{Факультет інформатики та обчислювальної техніки}}\\
+  \vspace{2mm}
+  \underline{\smash{Кафедра обчислювальної техніки}}
 
-  \vspace*{\fill}
+  \vspace{1cm}
 
-  gla
+  \hfill\begin{minipage}{0.35\linewidth}
+  \begin{flushleft}
+    %\begin{spacing}{1.0}
+      <<До захисту допущено>>\\
+      Завідувач кафедри\\
+      \fillin[(підпис)]{\hspace{2.2cm}} \fillin[(ініціали, прізвище)]{Луцький~Г.М.}\\
+      ``\fillin{\phantom{99}}''\fillin{\hspace{3cm}} \fillin{2016}~р.
+    %\end{spacing}
+  \end{flushleft}
+  \end{minipage}
+
+  \vspace{1cm}
+
+  \textbf{\Large Дипломний проект}\\
+  \textbf{на здобуття ступеня бакалавра}\\
+  \begin{flushleft}
+  з напряму підготовки \fillin[(код і назва)]{\hspace{2.5cm}6.010305 <<Програмна інженерія>>}\uline{\hfill\mbox{}}\\
+  на тему: \fillin{Система управління для вбудованих пристроїв з мінімальним\hfill\mbox{}}\\
+  \fillin{обсягом пам'яті\hfill\mbox{}}\\
+  \underline{\hspace{\textwidth}}
+
+  \vspace{1cm}
+
+  Виконав: студент \fillin{\space 4\space} курсу, групи \fillin[(шифр групи)]{\space\space ІП-22\space\space}\\
+  \fillin[(прізвище, ім'я, по-батькові)]{\hspace{3cm} Шмалько Олексій Олександрович\hspace{3cm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}\\
+  Керівник \fillin[(посада, науковий ступінь, вчене звання, прізвище та ініціали)]{\hspace{2cm}доц. каф. ОТ, к.т.н. Верба О.А.\hspace{2cm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}\\
+  Консультант нормоконтроль \fillin[(посада, науковий ступінь, вчене звання, прізвище та ініціали)]{\hspace{0.5cm} д.т.н., проф., Симоненко В.П.\hspace{5mm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}
+  Рецензент \fillin[(посада, науковий ступінь, вчене звання, прізвище та ініціали)]{\hspace{17mm}\phantom{доц. каф. ОТ, к.т.н. Верба О.А.}\hspace{2cm}}\uline{\hfill\mbox{}} \fillin[(підпис)]{\hspace{22mm}}\\
+  \end{flushleft}
+
+  \vspace{1cm}
+  \hfill\begin{minipage}{0.53\linewidth}
+  \begin{flushleft}
+    \begin{spacing}{1.0}
+    Засвідчую, що у цьому дипломному проекті немає запозичень з праць інших авторів без відповідних посилань.\\
+    \end{spacing}
+    \vspace{3mm}
+    Студент \fillin[(підпис)]{\hspace{22mm}}
+  \end{flushleft}
+  \end{minipage}
 
   \vspace*{\fill}
   \mypagefooter{}
+  %\vspace*{\fill}
 \end{specialpage}
 
 \end{document}
