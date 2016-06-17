@@ -380,6 +380,18 @@
   \enlargethispage{-25mm}
 }
 
+\newenvironment{otherspecialpage}{
+  \clearpage
+  \thispagestyle{empty}
+  \enlargethispage{20mm}
+  %\enlargethispage{45mm}
+}{
+  \clearpage
+  \setcounter{page}{1}
+  \thispagestyle{plain}
+  \enlargethispage{-25mm}
+}
+
 % underlines with \uline
 \usepackage[normalem]{ulem}
 
@@ -392,6 +404,7 @@
       \shortstack{\uline{\smash{#2}}\\\scriptsize#1}}%
   }%
 }
+\newcommand\fillinline{\uline{\hfill\mbox{}}}
 
 \usepackage{multirow}
 \usepackage{array}
