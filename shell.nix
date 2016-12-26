@@ -17,7 +17,7 @@ let
 in rec {
   bachelor = pkgs.stdenv.mkDerivation rec {
     name = "bachelor-env";
-    src = ./init.tex;
+    # src = ./init.tex;
     buildInputs = [
       texlive
       # (pkgs.texlive.combine {
