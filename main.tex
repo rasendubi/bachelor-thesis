@@ -171,17 +171,21 @@
 % GOST frames
 \unitlength=1mm
 
+\newcommand{\thesistitle}{Мова програмування для вбудованих пристроїв}
+\newcommand{\supervisor}{Регіда~П.Г.}
+\newcommand{\standardcontrol}{Мартинюк~Я.В.}
+
 % renewcommand when stamp code changes
 \newcommand\stampcode{}
 \newcommand\lastpagelabel{}
 
 \newcommand{\stampauthor}{Шмалько~О.О.}
-\newcommand{\stampreviewer}{Верба~О.А.}
+\newcommand{\stampreviewer}{\supervisor{}}
 \newcommand{\stampcritique}{}
-\newcommand{\stampnormativecontrol}{Симоненко~В.П.}
+\newcommand{\stampnormativecontrol}{\standardcontrol{}}
 \newcommand{\stampapproved}{Луцький~Г.М.}
 
-\newcommand{\stampname}{Система управління для вбудованих пристроїв з мінімальним обсягом пам'яті}
+\newcommand{\stampname}{\thesistitle{}}
 \newcommand\stamppartname{Пояснювальна записка}
 
 \def\VL{\line(0,1){15}}
@@ -223,7 +227,7 @@
           \parbox[top][15mm][t]{50mm}{
             \centering
             \begin{singlespacing}
-              \sl\GostA\large НТУУ <<КПІ>> ФІОТ\\ гр.~ІП-22
+              \sl\GostA\large НТУУ <<КПІ>> ФІОТ\\ гр.~ІП-63с
             \end{singlespacing}
           }
         %}
@@ -410,7 +414,7 @@
 \usepackage{array}
 \setlength{\arrayrulewidth}{0.4mm}
 
-\newcommand\mypagefooter{Київ -- 2016 року}
+\newcommand\mypagefooter{Київ -- 2017 року}
 
 \usepackage{xifthen}
 
@@ -418,35 +422,39 @@
 
 \enlargethispage{-25mm}
 
-\subfile{intro}
+%\subfile{intro}
 
 
 \subfile{task}
 
-\subfile{abstract}
+% \subfile{abstract}
 
-\subfile{vp}
+%\subfile{vp}
+
+\renewcommand\stampcode{ІАЛЦ.467100.002 ТЗ}
+
+%\subfile{technical-task-title}
 
 %\subfile{technical-task}
 
-\subfile{explanatory-note}
+\subfile{explanatory-note-master}
 
-\begin{specialpage}
-  \vspace*{\fill}
+%\begin{specialpage}
+%  \vspace*{\fill}
+%
+%  \textbf{\large
+%  ДОДАТКИ\\
+%  до дипломного проекту
+%  }
+%
+%  \vspace{10mm}
+%  на тему: \uline{<<\thesistitle{}>>}
+%
+%  \vfill
+%\end{specialpage}
 
-  \textbf{\large
-  ДОДАТКИ\\
-  до дипломного проекту
-  }
+% \subfile{appendix-a}
 
-  \vspace{10mm}
-  на тему: \uline{<<Система управління для вбудованих пристроїв з мінімальним обсягом пам'яті>>}
-
-  \vfill
-\end{specialpage}
-
-\subfile{appendix-a}
-
-\subfile{appendix-b}
+% \subfile{appendix-b}
 
 \end{document}
