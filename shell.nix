@@ -20,6 +20,8 @@ in rec {
     # src = ./init.tex;
     buildInputs = [
       texlive
+      pkgs.python3Packages.pygments
+      pkgs.inotify-tools
       # (pkgs.texlive.combine {
       #   inherit (pkgs.texlive)
       #   scheme-full
