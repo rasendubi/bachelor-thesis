@@ -359,7 +359,8 @@
   \specialsection{Висновки до розділу \thechapter}
 }
 
-\newcommand\code[1]{{\tt #1}}
+% mbox prevents hyphenation
+\newcommand\code[1]{\mbox{\tt #1}}
 %\newcommand\code[1]{#1}
 
 \DeclareCaptionFormat{listing}{%
@@ -427,6 +428,9 @@
 
 \usepackage{tabu}
 \usepackage{longtable}
+
+% for \FloatBarrier
+\usepackage{placeins}
 
 \begin{document}
 

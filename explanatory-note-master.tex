@@ -12,16 +12,18 @@
 \newcommand\engacro[3]{\acro{#1}{\acroextra{(}#2\acroextra{) #3}}}
 
 \specialchapter{Список скорочень}
-\begin{acronym}[EDSL]
+\begin{acronym}[MMMM]
 
   % To decrease spacing
   % \setlength\parskip{0ex}
 
+  \engacro{ADT}{Algebraic Data Type}{Алегбраїчний Тип Даних}
   \engacro{AST}{Abstract Syntax Tree}{Абстрактне Синтаксичне Дерево}
   \engacro{DSL}{Domain-Specific Language}{Предметно-Орієнтована Мова}
   \engacro{EDSL}{Embedded Domain-Specific Language}{Вбудована Предметно-Орієнтована Мова}
   \acro{ELF}{Executable and Linkable Format}
   \engacro{FFI}{Foreign Function Interface}{Інтерфейс Зовнішньої Функції}
+  \engacro{GADT}{Generalized Algebraic Data Type}{Узагальнений Алгебраїчний Тип Даних}
   \engacro{LTO}{Link Time Optimization}{Оптимізація Часу Зв'язування}
   \engacro{RAII}{Resource Acquisition Is Initialization}{Отримання ресурсу є ініціалізація}
   \engacro{RTOS}{Real-Time Operating System}{Операційна Система Реального Часу}
@@ -276,9 +278,9 @@ Nim є дуже цікавою мовою, що має опціональний 
 Мова має мінімізувати накладні витрати на забезпечення безпеки. Швидкодія програм, написаних на розроблюваній мові, має бути порівнювана з аналогічними програмами написаними на мові \LangC{}.
 За можливості, перевага надається абстраціям з нульовою вартістю.
 
-\subsection{Сучасність}
-Розроблювана мова має надавати сучасні можливості для створення абстракцій.
-Мова має включати \todo{write this section}
+%\subsection{Сучасність}
+%Розроблювана мова має надавати сучасні можливості для створення абстракцій.
+%Мова має включати \todo{write this section}
 
 \subsection{Найгірші практики повинні бути важкими}
 Є велика різниця між ``підтримується мовою'' і ``заохочується мовою''.
@@ -290,6 +292,7 @@ Nim є дуже цікавою мовою, що має опціональний 
 \section{Аналіз типових помилок}
 Для того, щоб ефективно запобігати помилкам, необхідно більш детально дослідити їх.
 
+\FloatBarrier
 \subsection{Аналіз 1}\label{errors:os}
 В рамках секції \ref{errors:os} розглядаються результати наукової статті ``An Empirical Study of Operating Systems Errors''\cite{an-empirical-study-of-operating-systems-errors}.
 
@@ -301,17 +304,17 @@ Nim є дуже цікавою мовою, що має опціональний 
   \begin{tabu}{|c|c|X[l]|}
     \hline
     Check & Nbugs & Rule checked \\
-    \hline\hline
+    \hline
     \code{Block} & 206 + 87 & To avoid deadlock, do not call blocking functions with interrupts disabled or a spinlock held. \\
     \code{Null} & 124 + 267 & Check potentially NULL pointers returned from routines. \\
     \code{Var} & 33 + 69 & Do not allocate large stack variables (> 1K) on the fixed-size kernel stack. \\
-    \hline\hline
+    \hline
     \code{Inull} & 69 & Do not make inconsistent assumptions about whether a pointer is \code{NULL}. \\
     \code{Range} & 54 & Always check bounds of array indices and loop bounds derived from user data. \\
     \code{Lock} & 26 & Release acquired locks; do not double-acquire locks. \\
     \code{Intr} & 27 & Restore disabled interrupts. \\
     \code{Free} & 17 & Do not use freed memory. \\
-    \hline\hline
+    \hline
     \code{Float} & 10 + 15 & Do not use floating point in the kernel. \\
     \code{Real} & 10 + 1 & Do not leak memory by updating pointers with potentially \code{NULL} realloc return values. \\
     \code{Param} & 7 & Do not dereference user pointers. \\
@@ -327,17 +330,17 @@ Nim є дуже цікавою мовою, що має опціональний 
   \begin{tabu}{|c|X[l]|}
     \hline
     Перевірка & Засоби попередження \\
-    \hline\hline
+    \hline
     \code{Block} & Система ефектів \\
     \code{Null} & Використання посилань замість вказівників \\
     \code{Var} & Розрахунок максимального розміру стеку, модифікована система ефектів \\
-    \hline\hline
+    \hline
     \code{Inull} & Система ефектів, використання вказівників \\
     \code{Range} & Автоматична перевірка границь, залежні типі, система ефектів, liquid типи \\
     \code{Lock} & Деструктори (RAII) \\
     \code{Intr} & Деструктори (RAII) \\
     \code{Free} & Лінійна система типів, RAII \\
-    \hline\hline
+    \hline
     \code{Float} & Система ефектів \\
     \code{Real} & Дизайн правильних інтерфейсів і абстракцій \\
     \code{Param} & Система ефектів застосована до зміних, легкі обгортки навколо інших типів \\
@@ -348,6 +351,7 @@ Nim є дуже цікавою мовою, що має опціональний 
   \label{linux-errors-mitigation}
 \end{table}
 
+\FloatBarrier
 \subsection{Аналіз 2}\label{linux-kernel-developer-responses-section}
 Секція \ref{linux-kernel-developer-responses-section} аналізує дані про розповсюдженість помилок, що були зібрані в рамках дослідження ``Linux Kernel Developer Responses to Static Analysis Bug Reports''\cite{linux-kernel-developer-responses}.
 
@@ -367,6 +371,7 @@ Nim є дуже цікавою мовою, що має опціональний 
 \item unsafe use of negative return value
 \end{enumerate}
 
+\FloatBarrier
 \subsection{Аналіз 3}\label{errors:variability}
 Секція \ref{errors:variability} аналізує дані про розповсюдженість помилок, що були зібрані в рамках дослідження ``40 Variability Bugs in the Linux Kernel. A Qualitative Study''\cite{40-variability-bugs}.
 
@@ -414,6 +419,7 @@ Nim є дуже цікавою мовою, що має опціональний 
   \label{variability-errors}
 \end{table}
 
+\FloatBarrier
 \section{Дизайн}
 
 \subsection{Сімейство синтаксису}
@@ -597,13 +603,976 @@ mymin a b = if a < b then a else b
 Це може бути важливим для програмування вбудованих систем, оскільки майже завжди розмір стеку є обмеженим.
 
 \section{Опис мови}
-\subsection{Коментарі}
+\newcommand{\deftype}[1]{\textbf{\code{#1}}}
+\newcommand{\typeitem}[1]{\item \deftype{#1}.}
 
-% \chapterconslusions{}
+\FloatBarrier
+\subsection{Коментарі}
+Багато-рядкові коментарі можуть призвести до неочікуваних помилок.
+Вкладені коментарі також можуть викликати питання (чи вони підтримуються).
+
+Однорядкові коментарі, навпроти, максимально прості і однозначні.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+// Мова підтримує лише однорядкові коментарі
+
+// Для того, щоб продовжити коментар на наступному
+// рядку, рядок має розпочинатися з нового коментарю.
+  \end{minted}
+  \caption{Приклад коментарів у розроблюваній мові}
+  \label{lang:comments}
+\end{figure}
+
+EBNF для коментарів приведено на рисунку \ref{ebnf:comment}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+comment = '/', '/', {all characters - '\n'};
+
+all characters = ? all unicode characters ?;
+  \end{minted}
+  \caption{EBNF для коментарів}
+  \label{ebnf:comment}
+\end{figure}
+
+\FloatBarrier
+\subsection{Ідентифікатори}
+Ідентифікаторами (або іменами) може бути будь-яка послідовність, що складається з латинських букв, цифр і знаку підкреслення, і починається із букви або знаку підкреслення.
+
+EBNF для ідентифікаторів приведено на рисунку \ref{ebnf:id}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+id = (alpha | "_"), {alpha | "_" | digit};
+
+alpha = ? all latin letters ?;
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+  \end{minted}
+  \caption{EBNF для ідентифікаторів}
+  \label{ebnf:id}
+\end{figure}
+
+\FloatBarrier
+\subsection{Тип void}
+Розроблювана мова включає у себе тип \deftype{void}, що має єдине можливе значення --- \code{void}.
+Дане значення займає нуль байт і повністю оптимізується компілятором (не присутнє під час виконання).
+
+Це відрізняється від підходу в мові \LangC{}, де тип \code{void} не має жодних значень.
+Ця особливість стане в нагоді для визначення більш потужних властивостей системи типів.
+
+Тип \code{void} підтримує лише операції перевірки на рівність (\code{==} і \code{!=}). (Всі \code{void} значення рівні між собою).
+
+\FloatBarrier
+\subsection{Логічний тип}
+Розроблювана мова підтримує логічний тип \deftype{bool}.
+Він має два можливих значення: \code{true} і \code{false}.
+Використовується в логічних операціях, а також в умовах операторів.
+
+Список операцій, що підтримуються між двома значеннями логічного типу наведено у таблиці \ref{lang:bool:operators}.
+
+\begin{table}
+  \tabulinesep=1mm
+  \begin{tabu}{|l|X[l]|l|}
+    \hline
+    Символ операції & Операція & Тип результату \\
+    \hline
+    \code{<}    & Менше & \code{bool} \\
+    \code{>}    & Більше & \code{bool} \\
+    \code{<=}   & Менше-дорівнює & \code{bool} \\
+    \code{>=}   & Більше-дорівнює & \code{bool} \\
+    \code{==}   & Дорівнює & \code{bool} \\
+    \code{!=}   & Не дорівнює & \code{bool} \\
+    \code{\&\&} & Логічне І & \code{bool} \\
+    \code{||}   & Логічне АБО & \code{bool} \\
+    \hline
+  \end{tabu}
+  \caption{Операції, що підтримуються над логічним типом}
+  \label{lang:bool:operators}
+\end{table}
+
+При порівнюванні значень, \code{false} є меншим за \code{true}.
+
+\FloatBarrier
+\subsection{Числа}
+Розроблювана мова підтримує наступні числові типи:
+\begin{itemize}[nosep]
+\typeitem{u8} 8-бітне беззнакове ціле.
+\typeitem{i8} 8-бітне знакове ціле.
+\typeitem{u16} 16-бітне беззнакове ціле.
+\typeitem{i16} 16-бітне знакове ціле.
+\typeitem{u32} 32-бітне беззнакове ціле.
+\typeitem{i32} 32-бітне знакове ціле.
+\typeitem{u64} 64-бітне беззнакове ціле.
+\typeitem{i64} 64-бітне знакове ціле.
+\end{itemize}
+
+Числа з плаваючою точкою не підтримуються в рамках даної дипломного проекту, оскільки вони досить рідко використовуються в системному програмному забезпеченні, а в деяких випадках (програмування ядер операційних систем), використання чисел із плаваючою точкою заборонене.
+Підтримка чисел із плавоючою точкою може бути реалізована в наступній версії мови.
+
+Числа можуть бути введені у звичайній десятковій системі числення, а також у шістнадцятковій або двійковій.
+Система числення задається за допомогою префікса.
+Префікси \code{0x} і \code{0b} використовуються для задання шістнадцяткових і двійкових чисел відповідно; десяткові числа не потребують префіксів.
+Окрім того, можна вказати точний тип числа за допомогою використання постфіксів.
+Це дає змогу уникнути неоднозначностей.
+
+Приклади числових літералів, що підтримуються, наведено на рисунку \ref{lang:literals:numbers}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+// десяткові числа
+0
+15
+42
+-13
+
+// шістнадцяткові числа
+0x1234
+
+// двійкові числа
+0b01011001
+
+// специфікація типів
+15u8    // 8-bit unsigned integer
+0xFFu8  // 8-bit unsigned integer
+0i32    // 32-bit signed integer
+  \end{minted}
+  \caption{Приклади числових літералів у розроблюваній мові}
+  \label{lang:literals:numbers}
+\end{figure}
+
+EBNF для числових літералів наведено на рисунку \ref{ebnf:numbers}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+number = number value, [number type specifier];
+
+number value = hexadecimal number
+  | binary number
+  | decimal number;
+
+hexadecimal number = '0x', hex digit, {hex digit};
+binary number = '0b', binary digit, {binary digit};
+decimal number = digit, {digit};
+
+hex digit = digit |
+  'A' | 'B' | 'C' | 'D' | 'E' | 'F' |
+  'a' | 'b' | 'c' | 'd' | 'e' | 'f';
+
+binary digit = '0' | '1';
+
+number type specifier =
+  'u8' | 'u16' | 'u32' | 'u64' |
+  'i8' | 'i16' | 'i32' | 'i64';
+  \end{minted}
+  \caption{EBNF для числових літералів}
+  \label{ebnf:numbers}
+\end{figure}
+
+Список операцій, що підтримуються між числами однакового типу наведено у таблиці \ref{lang:numbers:binary-operations}, де \emph{number} означає тип аргументів.
+
+\begin{table}
+  \tabulinesep=1mm
+  \begin{tabu}{|l|X[l]|l|}
+    \hline
+    Символ операції & Операція & Тип результату \\
+    \hline
+    \code{+} & Додавання & \emph{number} \\
+    \code{-} & Віднімання & \emph{number} \\
+    \code{*} & Множення & \emph{number} \\
+    \code{/} & Цілочисельне ділення & \emph{number} \\
+    \code{\%} & Залишок від цілочисельного ділення & \emph{number} \\
+    \code{\&} & Побітове І & \emph{number} \\
+    \code{|} & Побітове АБО & \emph{number} \\
+    \code{\^{}} & Побітове виключне АБО & \emph{number} \\
+    \code{>} & Більше & \code{bool} \\
+    \code{<} & Менше & \code{bool} \\
+    \code{>=} & Більше-дорівнює & \code{bool} \\
+    \code{<=} & Менше-дорівнює & \code{bool} \\
+    \code{==} & Дорівнює & \code{bool} \\
+    \code{!=} & Не дорівнює & \code{bool} \\
+    \hline
+  \end{tabu}
+  \caption{Список операцій над числами одного типу}
+  \label{lang:numbers:binary-operations}
+\end{table}
+
+Побітові здвиги підтримуються для будь-яких чисел за умови, що другий операнд є числом будь-якого беззнакового типу. Результат операції має тип першого операнду.
+Символ \code{\textless\textless} означає побітовий здвиг вліво, а \code{\textgreater\textgreater} --- побітовий здвиг вправо.
+
+Також, підтримується операція побітового НІ, які позначається символом ``\code{!}''. Наприклад, результатом операції \code{!0x0Fu8} є \code{0xF0u8}.
+
+За замовчуванням, для операцій додавання, віднімання і множення компілятор має вставляти перевірки часу виконання на переповнення; для операції ділення додатково перевіряється, що дільник не дорівнює нулю.
+
+\FloatBarrier
+\subsection{Вказівники}
+Вказівники в розроблюваній мові підтримують функціонал аналогічний до функціоналу вказівників у мові \LangC{}.
+Вони можуть вказувати на певну ділянку пам'яті, можуть бути розіменовані, а також підтримують адресну арифметику.
+Кілька вказівників можуть вказувати на одну ділянку пам'яті.
+
+Мова підтримує спецільний літерал \code{null}, що означає нульовий вказівник будь-якого типу (аналог \code{NULL} із мови \LangC{}).
+
+Вказівники можуть бути утворені за допомогою операції взяття адреси, або за допомогою приведення значень числового типу відповідного розміру до типу вказівника.
+
+Розроблювана мова підтримує два типи вказівників, що відрязняються константністю значення, на яке вони вказують.
+\begin{itemize}
+\typeitem{*\emph{type}}
+Вказівник на незмінюване значення типу \emph{type}.
+Наприклад, вказівник на значення логічного типу має тип \code{*bool}.
+\typeitem{*mut \emph{type}}
+Вказівник на змінюване значення типу \emph{type}.
+Наприклад, вказівник на значення логічного типу має тип \code{*mut bool}.
+\end{itemize}
+
+Будь-які операції над вказівниками вважаються ``небезпечними'' і мусять відбуватися у відповідних блоках.
+
+\FloatBarrier
+\subsection{Посилання}
+Посилання є ``безпечним'' аналогом вказівників і їх використання всіляко заохочується.
+
+Посилання підтримують обмежену кількість операцій: вони не підтримують адресну арифметику, не можуть вказувати на \code{null}. Кілька посилань не можуть вказувати на одну і ту саму ділянку пам'яті.
+
+Посилання можуть бути утворені за допомогою операції взяття адреси, або за допомогою приведення значення вказівника до посилання (що є ``небезпечною'' операцією, оскільки це може утворити посилання, що вказує на \code{null}).
+
+Як і з вказівниками, розроблювана мова підтримує два типи посилань, що відрязняються константністю значення, на яке вони вказують.
+\begin{itemize}
+\typeitem{\&\emph{type}}
+Посилання на незмінюване значення типу \emph{type}.
+Наприклад, посилання на значення логічного типу має тип \code{\&bool}.
+\typeitem{\&mut \emph{type}}
+Посилання на змінюване значення типу \emph{type}.
+Наприклад, посилання на значення логічного типу має тип \code{\&mut bool}.
+\end{itemize}
+
+Всі операції над посиланнями є ``безпечними'' і не потребують спеціальних блоків.
+
+\FloatBarrier
+\subsection{Масиви}
+Тип масиву значень типу \emph{type}, що містить \emph{N} елементів записується як \deftype{[\emph{type};~\emph{N}]}.
+
+На відміну від мови \LangC{}, масиви не приводяться до типу вказівника на елемент. Для цього можна використати конструкцію \code{\&arr[0]}, або метод \code{as\_ptr()}.
+
+Для задання масиву у програмі, достатньо перерахувати всі елементи масива через кому і оточити їх у квадратні дужки.
+
+Масиви підтримують операцію індексування. Приклад її використання наведено на рисунку \ref{lang:array:access}. Якщо елементів підтримує операції порівнювання, вони також можуть бути застосовані для масиву в цілому.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+let x = [1, 2, 3];
+assert!(x[0] == 1);
+assert!(x[1] == 2);
+assert!(x[2] == 3);
+
+let arr: [[u8; 32]; 32];
+arr[13][14] = 10;
+  \end{minted}
+  \caption{Приклад двовимірного масиву і індексування}
+  \label{lang:array:access}
+\end{figure}
+
+Окрім того, масиви підтримують наступні методи:
+\begin{itemize}
+\item \code{len()}. Повертає довжину масиву.
+\item \code{is\_empty()}. Повертає \code{true}, якщо довжина масиву дорівнює нулю.
+\item \code{as\_ptr()}. Повертає вказівник на перший елемент масиву.
+\item \code{contains()}. Повертає \code{true}, якщо масив містить елемент із заданим значенням.
+\item \code{starts\_with()}. Повертає \code{true}, якщо вказаний аргумент є префіксом масиву.
+\item \code{ends\_with()}. Повертає \code{true}, якщо вказаний аргумент є суфіксом масиву.
+\item \code{swap()}. Обмінює місцями два вказаних елементи масиву.
+\item \code{reverse()}. Розгортає порядок елементів у масиві.
+\item \code{sort()}. Сортує елементи масиву за порядком.
+\item \code{iter()}. Повертає ітератор на елементи масиву.
+\end{itemize}
+
+\FloatBarrier
+\subsection{Зрізи масивів}
+Зріз масиву\cite{array-slicing} елементів типу \emph{type} записується як \deftype{[\emph{type}]}.
+
+Зріз складається із вказівника на перший елемент масиву і числа, що зберігає кількість елементів.
+
+Зріз можна отримати за допомогою спеціальної операції, приклад використання якої наведено на рисунку \ref{lang:slicing}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+let arr: [u8; 32];
+
+arr[0..3] // зріз масиву з 0 по 3 елементи включно
+  \end{minted}
+  \caption{Приклад отримання зрізу масиву}
+  \label{lang:slicing}
+\end{figure}
+
+Зрізи підтримують наступні методи:
+\begin{itemize}
+\item \code{len()}. Повертає довжину зрізу.
+\item \code{is\_empty()}. Повертає \code{true}, якщо довжина зрізу дорівнює нулю.
+\item \code{as\_ptr()}. Повертає вказівник на перший елемент зрізу.
+\item \code{contains()}. Повертає \code{true}, якщо зріз містить елемент із заданим значенням.
+\item \code{starts\_with()}. Повертає \code{true}, якщо вказаний аргумент є префіксом зрізу.
+\item \code{ends\_with()}. Повертає \code{true}, якщо вказаний аргумент є суфіксом зрізу.
+\item \code{swap()}. Обмінює місцями два вказаних елементи зрізу.
+\item \code{reverse()}. Розгортає порядок елементів у зрізі.
+\item \code{sort()}. Сортує елементи зрізу за порядком.
+\item \code{iter()}. Повертає ітератор на елементи зрізу.
+\end{itemize}
+
+\FloatBarrier
+\subsection{Рядки}
+Рядки у розроблюваній мові представлені як масив беззнакових байтів.
+
+Підтримуються рядкові літерали, які можуть бути будь-яким набором символів оточених в подвійні лапки.
+Багаторядкові рядкові літерали не дозволені.
+
+Підтримується екранування символів за допомогою оберненої косої риски (\code{\textbackslash}).
+Таблиця екранованих послідовностей, що підтримуються, наведена у таблиці \ref{lang:escape-sequences}.
+
+Також, мова дозволяє різні інтерпретації рядкових літералів під час компіляції за допомогою префіксів.
+Прикладом такої інтерпретації є префікс \code{b}, що інтерпретує строковий літерал як масив беззнакових байтів (тип \code{u8}, на відміну від типу \code{char}, що підтримує кодування Unicode символів).
+Така інтерпретація корисна, так як дозволяє не використовувати Unicode в програмах, що не потребують цього (що є особливо корисним в системах з обмеженою пам'яттю).
+
+Приклади рядкових літералів наведено на рисунку \ref{lang:literals:strings}.
+
+\begin{table}
+  \tabulinesep=1mm
+  \begin{tabu}{|l|l|X[l]|}
+    \hline
+    Екранована послідовність & Шістнадцяткове значення & Символ \\
+    \hline
+    \code{\textbackslash{}n} & 0x0A & Новий рядок \\
+    \hline
+    \code{\textbackslash{}r} & 0x0D & Повернення каретки \\
+    \hline
+    \code{\textbackslash{}t} & 0x09 & Горизонтальний таб \\
+    \hline
+    \code{\textbackslash{}\textbackslash{}} & 0x5C & Обернена коса риска \\
+    \hline
+    \code{\textbackslash{}'} & 0x27 & Одинарна лапка \\
+    \hline
+    \code{\textbackslash{}"} & 0x22 & Подвійна лапка \\
+    \hline
+    \code{\textbackslash{}x\emph{hh}} & будь-який & Байт, значення якого є \code{\emph{hh}} інтерпретоване як шістнадцяткове число \\
+    \hline
+  \end{tabu}
+  \caption{Список екранованих послідовностей}
+  \label{lang:escape-sequences}
+\end{table}
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+"this is a string literal"
+
+"line1\nline2\nline3"
+
+"He said: \"hello\""
+
+b"this is a bytestring"
+  \end{minted}
+  \caption{Приклади рядкових літералів у розроблюваній мові}
+  \label{lang:literals:strings}
+\end{figure}
+
+EBNF для рядкових літералів наведено на рисунку \ref{ebnf:string-literals}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+string = '"', {all characters - '\n' - '\\' | '\\', escaped symbol}, '"';
+
+escaped symbol = 'n' | 'r' | 't' | '\\' | "'" | '"'
+  | 'x', hexadecimal digit, hexadecimal digit;
+  \end{minted}
+  \caption{EBNF для рядкових літералів}
+  \label{ebnf:string-literals}
+\end{figure}
+
+\FloatBarrier
+\subsection{Кортежі}
+Розроблювана мова підтримує типи кортежів.
+
+Тип кортежу записується наступним чином: \deftype{(\emph{type1}, \emph{type2}\emph{[, \ldots]})}.
+І означає кортеж із типів \emph{type1\ldots{}typeN}.
+
+З точки зору алгебраїчних типів даних (ADT, Algebraic Data Type), кортежі можуть розглядатися як добуток типів.
+(Значення кортежу містить в собі по одному значенню кожного із зазначених типів).
+
+Наприклад, кортеж із 8-бітного беззнакового цілого, логічного значення і вказівника має тип \code{(u8, bool, *u8)}. Прикладом значення такого типу може бути \code{(42, true, null)}.
+
+Доступитися до значень у кортежі можна за допомогою операцій доступу до поля.
+Назви полей є натуральні числа починаючи з нуля.
+Приклад такого використання наведено на рисунку \ref{lang:tuple:access}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+(42, true, null).0 == 42
+
+(42, true, null).1 == true
+
+(42, true, null).2 == null
+  \end{minted}
+  \caption{Приклад доступу до полів кортежу}
+  \label{lang:tuple:access}
+\end{figure}
+
+\FloatBarrier
+\subsection{Структури}
+Структури дозволяють групувати дані різних типів, даючи їм імена, тим самим вони є більш організованим способом, ніж кортежі.
+
+Загальні форми оголошення структури і створення її екземплярів наведено на рисунку \ref{lang:struct:usage}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+// Оголошення структури struct_name
+struct struct_name {
+    field1: type1;
+    field2: type2;
+    ...
+    fieldN: typeN;
+}
+
+// Просте створення екземпляру
+let x = struct_name{ value1, value2, ..., valueN };
+
+// Створення екземпляру з використанням
+// іменованих полей
+let y = struct_name{
+  field1: value1,
+  field2: value2,
+  ...
+  fieldN: valueN,
+};
+  \end{minted}
+  \caption{Оголошення типу структури і створення її екземплярів}
+  \label{lang:struct:usage}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+struct definition = ['pub'], 'struct', id,
+  '{', {field definition}, '}';
+
+field definition = ['pub'], id, ':', type, ';';
+  \end{minted}
+  \caption{EBNF для оголошення структур}
+  \label{ebnf:struct}
+\end{figure}
+
+Доступ до полей структури може бути виконаний за допомогою оператора ``\code{.}''.
+Приклад його використання наведено на рисунку \ref{lang:struct:access}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+struct my_struct {
+    my_number: u32;
+    my_bool: bool;
+    my_pointer: *u8;
+};
+
+let x = my_struct{ 42, true, null };
+
+x.my_number == 42
+x.my_bool == true
+x.my_pointer == null
+  \end{minted}
+  \caption{Приклад доступу до полей структури}
+  \label{lang:struct:access}
+\end{figure}
+
+\FloatBarrier
+\subsection{Типи перерахування}
+Розроблювана мова підтримує типи перерахування.
+
+Визначення перерахування створює окремий тип, що не приводиться автоматично до інших типів. (На відміну від мови \LangC{}, де \code{enum} всього лише визначає константи в глобальному просторі імен). Ця особливість схожа до \code{enum class} в мові C++\cite{c++:enums}.
+
+Доступ до значень перерахування може бути отриманий за допомогою оператора простору імен.
+
+Приклад використання перерахувань зображено на рисунку \ref{lang:enum}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+enum Weekday {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday,
+}
+
+let today = Weekday::Monday;
+  \end{minted}
+  \caption{Приклад використання перерахувань}
+  \label{lang:enum}
+\end{figure}
+
+EBNF для оголошення перерахувань наведено на рисунку \ref{ebnf:enum}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+enum definition = ['pub'], 'enum', id,
+  '{', enum options, '}';
+
+enum options = [option, [',', enum options], [',']];
+
+option = id, ['=', expression];
+  \end{minted}
+  \caption{EBNF для оголошення перерахувань}
+  \label{ebnf:enum}
+\end{figure}
+
+\FloatBarrier
+\subsection{Функції}
+Розроблювана мова підтримує функції визначені користувачем. Загальна форма визначення функції наведена на рисунку \ref{lang:function:definition}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+fn function_name(arg1: type1): rettype {
+  function;
+  body;
+
+  return_value
+}
+  \end{minted}
+  \caption{Загальна форма визначення функції}
+  \label{lang:function:definition}
+\end{figure}
+
+EBNF для визначення функцій наведено на рисунку \ref{ebnf:function}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+function def = ['pub'], id, '(', args, ')', ':', type,
+  compound statement;
+
+args = [argument, [',', args]];
+
+argument = id, ':', type;
+  \end{minted}
+  \caption{EBNF для визначення функцій}
+  \label{ebnf:function}
+\end{figure}
+
+Всі функції мають тип \deftype{fn(\emph{type1}\emph{[, \ldots]}): \emph{rettype}}, де \emph{type1 \ldots{} typeN} є типами аргументів функції, а \emph{rettype} є типом значення, що повертається.
+Назва функції є значенням даного типу.
+
+Даний тип підтримує лише операції присваювання і виклику, а також може бути переданий як аргумент функції.
+
+\FloatBarrier
+\subsection{Блоки імплементації}
+Структури і інші типи можуть бути розширені методами за допомогою блоків імплементації.
+Типи можуть мати більше одного блоку імплементації, що значить, що типи можуть бути розширені, навіть якщо вони знаходяться у сторонніх бібліотеках.
+
+На рисунку \ref{lang:impl-block} наведено кілька прикладів розширення типів.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+struct Rectange {
+    length: u32;
+    width: u32;
+}
+
+impl Rectange {
+    pub fn square(length: u32): Rectangle {
+        Rectange{
+          length: length,
+          width: length,
+        }
+    }
+    pub fn area(self: &Self): u32 {
+        self.length * self.width
+    }
+    pub fn perimeter(self: &Self): u32 {
+        (self.length + self.width) * 2
+    }
+}
+
+impl u32 {
+    pub fn pow2(self: Self): u32 {
+        self * self
+    }
+}
+  \end{minted}
+  \caption{Приклад розширення типів за допомогою блоків імплементації}
+  \label{lang:impl-block}
+\end{figure}
+
+EBNF для блоків імплементації наведено на рисунку \ref{ebnf:impl}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+impl block = 'impl', [type, 'for'], type,
+  '{', {function def}, '}';
+  \end{minted}
+  \caption{EBNF для блоків імплементацій}
+  \label{ebnf:impl}
+\end{figure}
+
+Варто також помітити, що розширення дозволене навіть для стандартних типів, що значно збільшує гнучкість.
+
+Блоки імплементації дозволяють додавати як методи екземпляру, так і методи типу.
+Якщо ім'я першого параметру метода є \code{self}, то даний метод є методом екземпляру; в інакшому випадку --- він є методом типу.
+
+В середині блоку імплементації спеціальне ім'я \code{Self} означає тип, для якого цей блок застосовується. Наприклад, в першому блоці на рисунку \ref{lang:impl-block}, \code{Self} відповідає типу \code{Rectange}, а в другому блоці --- \code{u32}.
+
+Параметр \code{self} може мати один із наступних типів:
+\begin{itemize}[nosep]
+\item \code{Self}
+\item \code{\&Self}
+\item \code{\&mut Self}
+\item \code{*Self}
+\item \code{*mut Self}
+\end{itemize}
+Інші типи для параметру \code{self} не дозволені.
+
+Методи екземпляра можуть бути викликані за допомогою оператору доступу застосованого до екземпляра типу. Методи типу можуть бути викликані за допомогою оператору простору імен (\code{::}). Приклад використання методів визначених на рисунку \ref{lang:impl-block} наведено на рисунку \ref{lang:impl-usage}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+let r = Rectangle::square(2);
+assert!(r.area() == 4);
+assert!(r.perimeter() == 8);
+
+assert!(4u32.pow2() == 16);
+  \end{minted}
+  \caption{Приклад використання методів}
+  \label{lang:impl-usage}
+\end{figure}
+
+\FloatBarrier
+\subsection{Типажі}
+Типажі це особливість мови, що символізує компілятору, яку функціональність має забезпечити певний тип.
+Типажі дуже схожі на інтерфейси в мові Java, однак характерною особливістю є те, що реалізація інтерфейсів не має знаходитися всередині визначення класу, а може бути надана окремо.
+
+Приклад визначення типажу наведено на рисунку \ref{lang:trait-declaration}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+trait Figure {
+    fn area(self: &Self): u32;
+
+    fn perimeter(self: &Self): u32;
+}
+  \end{minted}
+  \caption{Приклад визначення типажу}
+  \label{lang:trait-declaration}
+\end{figure}
+
+Реалізація типажу може бути надана за допомогою блоку імплементації. Приклад реалізації типажу, визначеного на рисунку \ref{lang:trait-declaration}, наведено на рисунку \ref{lang:trait-implementation}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+impl Figure for Rectange {
+    pub fn area(self: &Self): u32 {
+        self.length * self.width
+    }
+    pub fn perimeter(self: &Self): u32 {
+        (self.length + self.width) * 2
+    }
+}
+
+struct RightTriangle {
+    length: u32;
+    width: u32;
+}
+
+impl Figure for RightTriangle {
+    pub fn area(self: &Self): u32 {
+        (self.length * self.width) / 2
+    }
+    pub fn perimeter(self: &Self): u32 {
+        self.length +
+          self.width +
+          (self.length*self.length +
+            self.width*self.width).sqrt()
+    }
+}
+  \end{minted}
+  \caption{Приклад реалізації типажу}
+  \label{lang:trait-implementation}
+\end{figure}
+
+Якщо на етапі визначення типажу уже відомо, як зазвичай будуть реалізовувати певний метод, можна вказати його реалізацію за замовчуванням.
+Рисунок \ref{lang:trait-default} наводить приклад такого випадку, де метод \code{is\_invalid()} визначений як протилежність метода \code{is\_valid()}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+trait Foo {
+    fn is_valid(self: &Self): bool;
+
+    fn is_invalid(self: &Self): bool {
+        !self.is_valid()
+    }
+}
+  \end{minted}
+  \caption{Приклад використання імплементації метода за замовчуванням}
+  \label{lang:trait-default}
+\end{figure}
+
+Типажі можуть наслідуватися. Якщо типаж \code{B} наслідується від типажу \code{A}, то тип, що хоче реалізувати \code{B}, також забов'язаний реалізувати типаж \code{A}. Синтаксис наслідування типажів продемонстровано на рисунку \ref{lang:trait-inheritance}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+trait A {
+    fn method_a(self: &Self): bool;
+}
+
+// Типаж B наслідується від типажу A
+trait B : A {
+    fn method_b(self: &Self): bool;
+}
+
+struct Test {
+    result: bool;
+}
+
+impl A for Test {
+    pub fn method_a(self: &Self): bool {
+        self.result
+    }
+}
+
+impl B for Test {
+    pub fn method_b(self: &Self): bool {
+        !self.result
+    }
+}
+  \end{minted}
+  \caption{Синтаксис для наслідування типажу}
+  \label{lang:trait-inheritance}
+\end{figure}
+
+EBNF для визначення типажів наведено на рисунку \ref{ebnf:trait}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+trait def = 'trait', type, [':', type],
+  '{', {function def | function decl}, '}';
+
+function decl = ['pub'], id, '(', args, ')', ':', type;
+  \end{minted}
+  \caption{EBNF для визначення типажів}
+  \label{ebnf:trait}
+\end{figure}
+
+\FloatBarrier
+\subsection{Виведення типів}
+Розроблювана мова підтримує глобальне виведення типів (``type inference'' або ``type reconstruction'').
+В більшості місць, де необхідно вказати тип, можна вказати спеціальний тип-заповнювач, що позначається за символом підкреслення: ``\code{\_}''.
+
+Якщо компілятор не зможе реконструювати тип заповнювача, компіляція програми буде перервана.
+
+Кожне використання типу-заповнювача інстанціює нову змінну-тип. Іншими словами це значить, що всі використання типу-заповнювача незалежні і можуть бути виведені в різні типи.
+
+Для того, щоб звернутися до певного типу-заповнювача, розроблювана мова підтримує іменовані типи-заповнювачі.
+Іменованим типом-заповнювачем є будь-яке ім'я, що починається з одного підкреслення.
+Однакові іменовані типи-заповнювачі будуть реконструювані до спільного типу.
+
+За поведінкою, типи-заповнювачі дуже схожі до підстановочних типів у мові Haskell\cite{haskell:type-wildcards}.
+
+Приклад використання типів-заповнювачів наведено на рисунку \ref{lang:type-placeholder}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+// виведений тип: bool
+let x: _ = true;
+
+// виведений тип: u8
+let y: _ = 42;
+y + 3u8;
+
+// виведений тип: [u16; 0]
+let z: _ = [];
+fn a(arg: [u16]): void;
+a(z);
+
+// виведений тип: fn(u8, u8): u8
+fn b(a: u8, b: _): _ {
+  a + b
+}
+  \end{minted}
+  \caption{Приклад використання типів-заповнювачів}
+  \label{lang:type-placeholder}
+\end{figure}
+
+EBNF для типів-заповнювачів наведено на рисунку \ref{ebnf:type-placeholder}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+type placeholder = '_', {alpha | digit};
+  \end{minted}
+  \caption{EBNF для типів-заповнювачів}
+  \label{ebnf:type-placeholder}
+\end{figure}
+
+\FloatBarrier
+\subsection{Змінні}
+Розроблювана мова підтримує визначення змінюваних і константних змінних.
+За замовчуванням, змінна є константною.
+Для створення неконстантної змінної, необхідно додати ключове слово \code{mut} (від слова ``mutable'').
+
+Приклад визначення змінних продемонстровано на рисунку \ref{lang:variables}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+// незмінювана змінна
+let x: u32 = 5;
+x = 6; // помилка!
+
+// змінювана змінна
+let mut y: u32 = 42;
+y = 15;
+  \end{minted}
+  \caption{Приклад визначення змінних}
+  \label{lang:variables}
+\end{figure}
+
+\FloatBarrier
+\subsection{Константи}
+Окрім незмінюваних змінних, розроблювана мова підтримує константи часу компіляції.
+Компілятор гарантує, що їх значення буде підраховано під час компіляції і не може змінюватися.
+
+Приклад оголошення константи наведено на рисунку \ref{lang:const}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+const x: u32 = 5;
+  \end{minted}
+  \caption{Приклад оголошення константи}
+  \label{lang:const}
+\end{figure}
+
+\FloatBarrier
+\subsection{Умовний оператор}
+Синтаксис умовного оператора наведено на рисунку \ref{lang:if-syntax}, де \code{condition} є виразом логічного типу, а \code{expr1} і \code{expr2} мають однаковий тип.
+Умовний оператор є виразом, результуючий тип якого дорівнює типу \code{expr1} і \code{expr2}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+if condition { expr1 } else { expr2 }
+
+if condition1 {
+  expr1
+} else if {
+  expr2
+} else {
+  expr3
+}
+
+if condition { expr1 }
+// аналогічно до
+if condition { expr1 } else { void }
+  \end{minted}
+  \caption{Синтаксис умовного оператора}
+  \label{lang:if-syntax}
+\end{figure}
+
+Як в усіх мовах програмування, вираз \code{expr1} буде розраховано, коли умова дорівнює \code{true}; в протилежному випадку буде розраховано вираз \code{expr2}.
+
+Якщо гілка \code{else} складається з одного умовного оператора, фігурні дужки можна опустити, що показано в другому прикладі на рисунку \ref{lang:if-syntax}.
+В усіх інших випадках фігурні дужки навколо гілок умовного виразу обов'язкові.
+
+Гілку \code{else} можна опустити.
+В цьому випадку, це буде аналогічно поверненню \code{void} з цієї гілки.
+Це означає, що гілка \code{then} також має повертати \code{void}.
+
+EBNF для умовних виразів наведено на рисунку \ref{ebnf:if}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{ebnf}
+conditional expr =
+  'if', expression, compound statement,
+  ['else', (conditional expr | compound statement)];
+  \end{minted}
+  \caption{EBNF для умовного оператора}
+  \label{ebnf:if}
+\end{figure}
+
+\FloatBarrier
+\subsection{Цикли}
+Розроблювана мова підтримує цикл \code{while}, що має форму зазначену на рисунку \ref{lang:while}.
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+while condition {
+    statements;
+}
+  \end{minted}
+  \caption{Загальна форма циклу \code{while}}
+  \label{lang:while}
+\end{figure}
+
+Під час виконання, спочатку розраховується умова. Якщо умова виконується, тіло циклу виконується допоки умова є дійсною; в інакшому випадку, тіло циклу не виконується.
+
+У тілі циклу можна використовувати ключові оператори \code{continue} і \code{break}:
+\begin{itemize}[nosep]
+\item \code{continue} завершує поточну ітерацію циклу і переходить до перевірки умови для наступної ітерації.
+\item \code{break} завершує цикл повністю. Може повертати значення із циклу. Синтаксис для даної можливості наведено на рисунку \ref{lang:break-value}.
+\end{itemize}
+
+\begin{figure}[h]
+  \centering
+  \begin{minted}[breaklines]{rust}
+let mut i = 0;
+let x = while true {
+  if i >= 10 {
+    break i;
+  }
+  i = i + 1;
+};
+
+assert!(x == 10);
+  \end{minted}
+  \caption{Повернення значення із циклу за допомогою оператора \code{break}}
+  \label{lang:break-value}
+\end{figure}
+
+\chapterconslusions{}
+У даному розділі було проаналізовано середовище системного програмування і програмування для вбудованих пристроїв.
+Було виявлено основні вимоги і обмеження для мови програмування у даній сфері.
+
+Було сформовано головні пріоритети при розробці мови, а саме: зменшення кількості програмних помилок без зниження продуктивності компілюємих програм.
+
+Було проаналізовано ряд наукових видань і виявлено типові помилки, що допускають програмісти системного програмного забезпечення, а також запропоновано шляхи їх уникнення.
+
+Було сформовано список і надано детальний опис бажаних характеристик мови.
+
+Відштовхуючись від зібраної інформації, було розроблено мову і надано її опис, включаючи приклади і опис EBNF для найбільш важливих частин.
 
 % \chapter{Реалізація системи та тестування}
 % \chapter{Аналіз отриманих результатів}
 
+\clearpage
 \begin{thebibliography}{00}
   \bibitem{stewart-bill:history-of-c}
     \eresource{History of C Programming Language}{http://www.livinginternet.com/i/iw\_unix\_c.htm}
@@ -633,6 +1602,9 @@ mymin a b = if a < b then a else b
   \bibitem{llvm}
     \eresource{The LLVM Compiler Infrastructure Project}{http://llvm.org/}
 
+  \bibitem{synthesis}
+    Massalin H. Synthesis: An Efficient Implementation of Fundamental Operating System Services. --- Columbia University, 1992. --- 158 c.
+
   \bibitem{cortex-m}
     \eresource{Cortex-M -- Arm}{https://www.arm.com/products/processors/cortex-m}
   \bibitem{cortex-m:stm}
@@ -658,6 +1630,13 @@ mymin a b = if a < b then a else b
     \eresource{Linux Kernel Developer Responses to Static Analysis Bug Reports}{https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html}
   \bibitem{40-variability-bugs}
     \eresource{40 Variability Bugs in the Linux Kernel. A Qualitative Study}{https://pure.itu.dk/ws/files/74775263/ITU_TR_2014_180.pdf}
+
+  \bibitem{array-slicing}
+    \eresource{Array slicing - Wikipedia}{https://en.wikipedia.org/wiki/Array\_slicing}
+  \bibitem{haskell:type-wildcards}
+    \eresource{7.15 Partial Type Signatures}{https://downloads.haskell.org/~ghc/7.10.1/docs/html/users_guide/partial-type-signatures.html}
+  \bibitem{c++:enums}
+    \eresource{enumeration declaration - cppreference.com}{http://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations}
 
 \end{thebibliography}
 
