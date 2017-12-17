@@ -10,8 +10,8 @@
 
 \begin{document}
 
-\renewcommand\stamppartname{Лістинг програми}
-\newpart{appendixb}{ІАЛЦ.467100.007 Д4}
+\renewcommand\stamppartname{Лістинг коду програми}
+\newpart{appendixb}{ІАЛЦ.467100.010 Д7}
 
 \begin{specialpage}
   \MakeUppercase{Додаток Б}\\
@@ -27,29 +27,43 @@
 
 \begin{singlespacing}
 
-  \lstinputlisting[
-    caption=smalloc/lib.rs,
-    firstline=79,
-    lastline=384,
-  ]{bkernel/smalloc/lib.rs}
+  %\lstinputlisting[
+  %  caption=Syntax.hs,
+  %]{../silicon/src/Silicon/Syntax.hs}
 
   \lstinputlisting[
-    caption=bscheduler/lib.rs,
-    firstline=13,
-    lastline=174,
-  ]{bkernel/bscheduler/lib.rs}
+    caption=Lexer.x,
+  ]{../silicon/src/Silicon/Lexer.x}
+
+  \lstinputlisting[
+    caption=Parser.y,
+  ]{../silicon/src/Silicon/Parser.y}
+
+  \lstinputlisting[
+    caption=Infer.hs,
+  ]{../silicon/src/Silicon/Infer.hs}
 
   %\lstinputlisting[
-  %  caption=stm32f4/volatile.rs,
-  %]{bkernel/stm32f4/volatile.rs}
+  %  caption=Emit.hs,
+  %]{../silicon/src/Silicon/Emit.hs}
 
-  \lstinputlisting[
-    caption=src/terminal.rs,
-  ]{bkernel/src/terminal.rs}
+  % \lstinputlisting[
+  %   caption=bscheduler/lib.rs,
+  %   firstline=13,
+  %   lastline=174,
+  % ]{bkernel/bscheduler/lib.rs}
 
-  \lstinputlisting[
-    caption=src/lib.rs,
-  ]{bkernel/src/lib.rs}
+  % %\lstinputlisting[
+  % %  caption=stm32f4/volatile.rs,
+  % %]{bkernel/stm32f4/volatile.rs}
+
+  % \lstinputlisting[
+  %   caption=src/terminal.rs,
+  % ]{bkernel/src/terminal.rs}
+
+  % \lstinputlisting[
+  %   caption=src/lib.rs,
+  % ]{bkernel/src/lib.rs}
 
 \end{singlespacing}
 

@@ -183,7 +183,7 @@
 \newcommand{\stampreviewer}{\supervisor{}}
 \newcommand{\stampcritique}{}
 \newcommand{\stampnormativecontrol}{\standardcontrol{}}
-\newcommand{\stampapproved}{Луцький~Г.М.}
+\newcommand{\stampapproved}{Стіренко~С.Г.}
 
 \newcommand{\stampname}{\thesistitle{}}
 \newcommand\stamppartname{Пояснювальна записка}
@@ -332,6 +332,16 @@
   \renewcommand\lastpagelabel{PartLastPage#1}
   \thispagestyle{plain}
 }
+\newcommand{\newappendix}[3]{
+  \finalizepart{}
+  \clearpage
+  \setcounter{page}{1}
+  \enlargethispage{-25mm}
+  \renewcommand\stampcode{#2}
+  \renewcommand\stamppartname{#3}
+  \renewcommand\lastpagelabel{PartLastPage#1}
+  \thispagestyle{plain}
+}
 \AtEndDocument{\finalizepart{}}
 
 % list with less spacing ( \begin{itemize}[nosep] )
@@ -369,6 +379,10 @@
 }
 
 \captionsetup[lstlisting]{ format=listing }
+\captionsetup[figure]{name=Рисунок}
+\captionsetup[table]{name=Таблиця}
+
+\renewcommand{\labelenumi}{\arabic{enumi})}
 
 \newenvironment{specialpage}{
   \clearpage
@@ -432,44 +446,47 @@
 % for \FloatBarrier
 \usepackage{placeins}
 
+\usepackage{amsmath}
+
+\newcommand{\appendixI}{Граматика мови. Бекуса--Наура Форма}
+\newcommand{\appendixII}{Абстрактне синтаксичне дерево. Діаграма класів}
+\newcommand{\appendixIII}{Формальна семантика виконання}
+\newcommand{\appendixIV}{Формальна семантика типізації}
+\newcommand{\appendixV}{Компілятор. Діаграма потоків даних}
+\newcommand{\appendixVI}{Діаграма компонентів}
+
 \begin{document}
 
-\enlargethispage{-25mm}
+\subfile{intro}
 
-%\subfile{intro}
+\subfile{task}
 
+\subfile{abstract}
 
-% TODO: uncomment me
-%\subfile{task}
+\subfile{vp}
 
-% \subfile{abstract}
-
-%\subfile{vp}
-
-\renewcommand\stampcode{ІАЛЦ.467100.002 ТЗ}
-
+%\renewcommand\stampcode{ІАЛЦ.467100.002 ТЗ}
 %\subfile{technical-task-title}
-
 %\subfile{technical-task}
 
 \subfile{explanatory-note-master}
 
-%\begin{specialpage}
-%  \vspace*{\fill}
-%
-%  \textbf{\large
-%  ДОДАТКИ\\
-%  до дипломного проекту
-%  }
-%
-%  \vspace{10mm}
-%  на тему: \uline{<<\thesistitle{}>>}
-%
-%  \vfill
-%\end{specialpage}
+\begin{specialpage}
+  \vspace*{\fill}
 
-% \subfile{appendix-a}
+  \textbf{\large
+  ДОДАТКИ\\
+  до дипломного проекту
+  }
 
-% \subfile{appendix-b}
+  \vspace{10mm}
+  на тему: \uline{<<\thesistitle{}>>}
+
+  \vfill
+\end{specialpage}
+
+\subfile{appendix-a}
+
+\subfile{appendix-b}
 
 \end{document}
